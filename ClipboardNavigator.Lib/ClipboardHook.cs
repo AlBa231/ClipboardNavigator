@@ -7,7 +7,7 @@
         public static ClipboardHook Instance => instance ??= new ClipboardHook();
 
         private ClipboardHook()
-        {
+        { 
         }
 
         public event EventHandler<ClipboardDataEventArgs>? ReceiveData;
