@@ -23,4 +23,9 @@ public class ClipboardData
     {
         return string.GetHashCode(Text);
     }
+
+    public override string ToString()
+    {
+        return Text;
+    }
 }

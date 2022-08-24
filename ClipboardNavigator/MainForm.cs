@@ -9,7 +9,7 @@ namespace ClipboardNavigator
         {
             InitializeComponent();
             this.clipboardFacade = new ClipboardFacade(new WindowsClipboardDataProvider());
-            this.lbClipboardHistory.DataSource = this.clipboardFacade.GetLastData();
+            this.lbClipboardHistory.DataSource = this.clipboardFacade.History;
         }
     }
 }

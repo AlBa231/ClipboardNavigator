@@ -12,7 +12,7 @@ namespace ClipboardNavigator.Tests
             var dataProvider = Mock.Of<IClipboardDataProvider>(p => p.GetCurrentValue() == testData);
             IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider);
 
-            var items = clipboardFacade.GetLastData();
+            var items = clipboardFacade.History;
 
             Assert.Single(items);
             Assert.Equal("test data", items[0].Text);
@@ -29,7 +29,7 @@ namespace ClipboardNavigator.Tests
 
             Mock.Get(dataProvider).Raise(m=>m.Changed += null, testData2);
 
-            var items = clipboardFacade.GetLastData();
+            var items = clipboardFacade.History;
 
             Assert.Equal(2, items.Count);
             Assert.Equal("test data", items[0].Text);

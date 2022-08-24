@@ -10,7 +10,7 @@ namespace ClipboardNavigator.Lib
     public class ClipboardFacade : IClipboardFacade
     {
         private readonly IClipboardDataProvider clipboardDataProvider;
-        private BindingList<ClipboardData> History { get; set; } = new();
+        public BindingList<ClipboardData> History { get; } = new();
 
         public ClipboardData CurrentValue
         {
@@ -28,20 +28,13 @@ namespace ClipboardNavigator.Lib
         {
             if (Equals(data, History.FirstOrDefault())) return;
 
-            History.Insert(0, data);
-        }
-
-        public BindingList<ClipboardData> GetLastData()
-        {
-            if (!Equals(CurrentValue, History.FirstOrDefault()))
-                History.Insert(0, CurrentValue);
-            return History;
+           History.Insert(0, data);
         }
     }
 
     public interface IClipboardFacade
     {
-        public BindingList<ClipboardData> GetLastData();
+        public BindingList<ClipboardData> History { get; }
 
         public ClipboardData CurrentValue { get; set; }
     }

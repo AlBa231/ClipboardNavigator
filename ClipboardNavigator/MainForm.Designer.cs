@@ -28,26 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.lvClipboardHistory = new System.Windows.Forms.ListView();
             this.lbClipboardHistory = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // lvClipboardHistory
-            // 
-            this.lvClipboardHistory.Location = new System.Drawing.Point(0, 0);
-            this.lvClipboardHistory.Name = "lvClipboardHistory";
-            this.lvClipboardHistory.Size = new System.Drawing.Size(661, 116);
-            this.lvClipboardHistory.TabIndex = 0;
-            this.lvClipboardHistory.UseCompatibleStateImageBehavior = false;
-            this.lvClipboardHistory.View = System.Windows.Forms.View.List;
-            // 
             // lbClipboardHistory
             // 
+            this.lbClipboardHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbClipboardHistory.FormattingEnabled = true;
             this.lbClipboardHistory.ItemHeight = 15;
-            this.lbClipboardHistory.Location = new System.Drawing.Point(44, 187);
+            this.lbClipboardHistory.Location = new System.Drawing.Point(0, 0);
             this.lbClipboardHistory.Name = "lbClipboardHistory";
-            this.lbClipboardHistory.Size = new System.Drawing.Size(493, 139);
+            this.lbClipboardHistory.Size = new System.Drawing.Size(661, 431);
             this.lbClipboardHistory.TabIndex = 1;
             // 
             // MainForm
@@ -56,7 +47,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(661, 431);
             this.Controls.Add(this.lbClipboardHistory);
-            this.Controls.Add(this.lvClipboardHistory);
             this.Name = "MainForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -64,8 +54,6 @@
         }
 
         #endregion
-
-        private ListView lvClipboardHistory;
         private ListBox lbClipboardHistory;
     }
 }
