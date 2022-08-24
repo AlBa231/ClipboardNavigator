@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using WK.Libraries.SharpClipboardNS;
 
 namespace ClipboardNavigator.Lib
@@ -12,6 +7,8 @@ namespace ClipboardNavigator.Lib
     {
         private readonly SharpClipboard clipboard = new();
 
+        public event ClipboardDataChanged? Changed;
+
         public WindowsClipboardDataProvider()
         {
             clipboard.ClipboardChanged += Clipboard_ClipboardChanged;
@@ -19,7 +16,8 @@ namespace ClipboardNavigator.Lib
 
         private void Clipboard_ClipboardChanged(object? sender, SharpClipboard.ClipboardChangedEventArgs e)
         {
-            
+            if (e.ContentType == SharpClipboard.ContentTypes.Text)
+                Changed?.Invoke(new ClipboardData((string)e.Content));
         }
 
         public ClipboardData GetCurrentValue()

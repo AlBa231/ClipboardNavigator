@@ -21,6 +21,14 @@ namespace ClipboardNavigator.Lib
         public ClipboardFacade(IClipboardDataProvider clipboardDataProvider)
         {
             this.clipboardDataProvider = clipboardDataProvider ?? throw new ArgumentNullException(nameof(clipboardDataProvider));
+            this.clipboardDataProvider.Changed += ClipboardDataProvider_Changed;
+        }
+
+        private void ClipboardDataProvider_Changed(ClipboardData data)
+        {
+            if (Equals(data, History.FirstOrDefault())) return;
+
+            History.Insert(0, data);
         }
 
         public BindingList<ClipboardData> GetLastData()
