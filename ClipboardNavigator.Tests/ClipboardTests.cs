@@ -1,21 +1,18 @@
-using ClipboardNavigator.Lib;
+namespace ClipboardNavigator.Tests;
 
-namespace ClipboardNavigator.Tests
+public class ClipboardTests
 {
-    public class ClipboardTests
+    [Fact]
+    public void TestClipboardHookReceived()
     {
-        [Fact]
-        public void TestClipboardHookReceived()
-        {
-            var data = new ClipboardData { Text = "test" };
+        var data = new ClipboardData("test");
 
-            var evt = Assert.Raises<ClipboardDataEventArgs>(
-                h => ClipboardHook.Instance.ReceiveData += h,
-                h => ClipboardHook.Instance.ReceiveData -= h,
-                () => ClipboardHook.Instance.AddData(data)
-            );
+        var evt = Assert.Raises<ClipboardDataEventArgs>(
+            h => ClipboardHook.Instance.ReceiveData += h,
+            h => ClipboardHook.Instance.ReceiveData -= h,
+            () => ClipboardHook.Instance.AddData(data)
+        );
             
 
-        }
     }
 }

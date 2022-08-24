@@ -28,25 +28,35 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvClipboardHistory = new System.Windows.Forms.ListView();
+            this.lbClipboardHistory = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // listView1
+            // lvClipboardHistory
             // 
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(661, 431);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
+            this.lvClipboardHistory.Location = new System.Drawing.Point(0, 0);
+            this.lvClipboardHistory.Name = "lvClipboardHistory";
+            this.lvClipboardHistory.Size = new System.Drawing.Size(661, 116);
+            this.lvClipboardHistory.TabIndex = 0;
+            this.lvClipboardHistory.UseCompatibleStateImageBehavior = false;
+            this.lvClipboardHistory.View = System.Windows.Forms.View.List;
+            // 
+            // lbClipboardHistory
+            // 
+            this.lbClipboardHistory.FormattingEnabled = true;
+            this.lbClipboardHistory.ItemHeight = 15;
+            this.lbClipboardHistory.Location = new System.Drawing.Point(44, 187);
+            this.lbClipboardHistory.Name = "lbClipboardHistory";
+            this.lbClipboardHistory.Size = new System.Drawing.Size(493, 139);
+            this.lbClipboardHistory.TabIndex = 1;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(661, 431);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lbClipboardHistory);
+            this.Controls.Add(this.lvClipboardHistory);
             this.Name = "MainForm";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -55,6 +65,7 @@
 
         #endregion
 
-        private ListView listView1;
+        private ListView lvClipboardHistory;
+        private ListBox lbClipboardHistory;
     }
 }
