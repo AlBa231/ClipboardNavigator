@@ -11,5 +11,10 @@ namespace ClipboardNavigator
             this.clipboardFacade = new ClipboardFacade(new WindowsClipboardDataProvider());
             this.lbClipboardHistory.DataSource = this.clipboardFacade.History;
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
