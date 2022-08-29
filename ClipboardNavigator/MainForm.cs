@@ -16,5 +16,20 @@ namespace ClipboardNavigator
         {
             Close();
         }
+
+        private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Visible)
+                Hide();
+            else Show();
+        }
+
+        private void MainForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                hideShowToolStripMenuItem_Click(sender, e);
+            }
+        }
     }
 }
