@@ -6,7 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>clipboard.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="clipboard.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ClipboardNavigator.Lib\ClipboardNavigator.Lib.csproj" />

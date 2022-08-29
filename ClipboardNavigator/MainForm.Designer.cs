@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lbClipboardHistory = new System.Windows.Forms.ListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -37,12 +38,16 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.textBoxCurrentClipboard = new System.Windows.Forms.TextBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.toolStrip1.SuspendLayout();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbClipboardHistory
@@ -98,7 +103,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -129,14 +134,39 @@
             this.textBoxCurrentClipboard.Size = new System.Drawing.Size(523, 520);
             this.textBoxCurrentClipboard.TabIndex = 0;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 549);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(755, 26);
+            this.statusStrip1.TabIndex = 5;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(55, 20);
+            this.toolStripStatusLabel1.Text = "Rows:0";
+            // 
+            // notifyIcon
+            // 
+            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
+            this.notifyIcon.Text = "notifyIcon1";
+            this.notifyIcon.Visible = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(755, 575);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.mainMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
@@ -151,6 +181,8 @@
             this.splitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -165,5 +197,8 @@
         private ToolStripMenuItem exitToolStripMenuItem;
         private SplitContainer splitContainer;
         private TextBox textBoxCurrentClipboard;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripStatusLabel1;
+        private NotifyIcon notifyIcon;
     }
 }
