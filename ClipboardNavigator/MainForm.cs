@@ -17,13 +17,6 @@ namespace ClipboardNavigator
             Close();
         }
 
-        private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Visible)
-                Hide();
-            else Show();
-        }
-
         private void MainForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             if (e.KeyCode == Keys.Escape)
@@ -36,5 +29,21 @@ namespace ClipboardNavigator
         {
             new SettingsForm().ShowDialog();
         }
+
+        private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                hideShowToolStripMenuItem_Click(sender, e);
+            }
+        }
+
+        private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Visible)
+                Hide();
+            else Show();
+        }
+
     }
 }
