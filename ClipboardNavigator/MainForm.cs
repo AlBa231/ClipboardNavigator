@@ -31,5 +31,10 @@ namespace ClipboardNavigator
                 hideShowToolStripMenuItem_Click(sender, e);
             }
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            new SettingsForm().ShowDialog();
+        }
     }
 }

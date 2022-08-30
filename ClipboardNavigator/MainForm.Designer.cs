@@ -43,10 +43,12 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.hideShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHide = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
+            this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -103,6 +105,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.settingsToolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
@@ -111,7 +114,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -172,9 +175,10 @@
             this.contextMenuNotifyIcon.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hideShowToolStripMenuItem,
+            this.settingsToolStripMenuItem,
             this.exitToolStripMenuItem1});
             this.contextMenuNotifyIcon.Name = "contextMenuStrip2";
-            this.contextMenuNotifyIcon.Size = new System.Drawing.Size(156, 52);
+            this.contextMenuNotifyIcon.Size = new System.Drawing.Size(156, 76);
             // 
             // hideShowToolStripMenuItem
             // 
@@ -183,6 +187,13 @@
             this.hideShowToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
             this.hideShowToolStripMenuItem.Text = "Hide/Show";
             this.hideShowToolStripMenuItem.Click += new System.EventHandler(this.hideShowToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem1
             // 
@@ -220,6 +231,13 @@
             this.btnOk.TabIndex = 0;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
+            // 
+            // settingsToolStripMenuItem1
+            // 
+            this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.settingsToolStripMenuItem1.Text = "Settings";
+            this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -276,5 +294,7 @@
         private Panel panel1;
         private Button btnHide;
         private Button btnOk;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripMenuItem settingsToolStripMenuItem1;
     }
 }
