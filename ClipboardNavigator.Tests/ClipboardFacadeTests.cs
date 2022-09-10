@@ -32,8 +32,8 @@ namespace ClipboardNavigator.Tests
             var items = clipboardFacade.History;
 
             Assert.Equal(2, items.Count);
-            Assert.Equal("test data", items[0].Text);
-            Assert.Equal("test data 2", items[1].Text);
+            Assert.Equal("test data 2", items[0].Text);
+            Assert.Equal("test data", items[1].Text);
         }
     }
 }

@@ -22,6 +22,8 @@ namespace ClipboardNavigator.Lib
         {
             this.clipboardDataProvider = clipboardDataProvider ?? throw new ArgumentNullException(nameof(clipboardDataProvider));
             this.clipboardDataProvider.Changed += ClipboardDataProvider_Changed;
+            if (!string.IsNullOrWhiteSpace(CurrentValue?.Text))
+                History.Add(CurrentValue);
         }
 
         private void ClipboardDataProvider_Changed(ClipboardData data)
