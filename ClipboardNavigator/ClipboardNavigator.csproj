@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ClipboardNavigator.Lib\ClipboardNavigator.Lib.csproj" />
+    <ProjectReference Include="..\ClipboardNavigator.LibWin\ClipboardNavigator.LibWin.csproj" />
   </ItemGroup>
 
 </Project>

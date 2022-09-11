@@ -1,10 +1,8 @@
-﻿using System.Windows.Forms;
-
-namespace ClipboardNavigator.Lib.Commands;
+﻿namespace ClipboardNavigator.Lib.Commands;
 
 public interface IClipboardCommand
 {
-    public Keys[] Keys { get; }
+    public IHotKey HotKey { get; }
 
     public void Execute();
 }

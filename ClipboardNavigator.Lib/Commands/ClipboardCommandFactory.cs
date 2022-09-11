@@ -1,43 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿namespace ClipboardNavigator.Lib.Commands;
 
-namespace ClipboardNavigator.Lib.Commands
+public class ClipboardCommandFactory
 {
-    public class ClipboardCommandFactory
+    private readonly Dictionary<IHotKey, IClipboardCommand> commands = new();
+
+    public IClipboardCommand? FindCommand(IHotKey hotKey)
     {
-        public static ClipboardCommandFactory Instance { get; } = new();
-
-        private readonly Dictionary<Keys[], IClipboardCommand> commands = new();
-
-        private ClipboardCommandFactory() { }
-
-        public void RegisterCommand(Keys[] hotKey, IClipboardCommand command)
-        {
-            var orderedKeys = hotKey.OrderBy(k => k).ToArray();
-            commands.Add(orderedKeys, command);
-        }
-
-        public IClipboardCommand? FindCommand(Keys[] hotKey)
-        {
-            var orderedKeys = hotKey.OrderBy(k => k).ToArray();
-
-            return commands.GetValueOrDefault(orderedKeys);
-        }
+        return commands.GetValueOrDefault(hotKey);
     }
 
-    public class CommandException : Exception
+    public void RegisterCommand(IHotKey hotKey, IClipboardCommand command)
     {
-        public CommandException()
+        try
         {
+            commands.Add(hotKey, command);
         }
-
-        public CommandException(string? message) : base(message)
+        catch (ArgumentException e)
         {
+            throw new CommandException("Specified HotKey already registered.", e);
         }
     }
 }

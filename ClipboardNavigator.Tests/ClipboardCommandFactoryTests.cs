@@ -1,5 +1,5 @@
-﻿using System.Windows.Forms;
-using ClipboardNavigator.Lib.Commands;
+﻿using ClipboardNavigator.Lib.Commands;
+using ClipboardNavigator.Tests.LibTestImplementation;
 using Moq;
 
 namespace ClipboardNavigator.Tests
@@ -7,23 +7,13 @@ namespace ClipboardNavigator.Tests
     public class ClipboardCommandFactoryTests
     {
         [Fact]
-        public void TestFindCommand()
-        {
-            var factory = ClipboardCommandFactory.Instance;
-
-            var command = factory.FindCommand(new [] { Keys.Control, Keys.Shift, Keys.Alt, Keys.W });
-
-            Assert.NotNull(command);
-        }
-
-        [Fact]
         public void TestRegisterCommand()
         {
             var command = Mock.Of<IClipboardCommand>();
-            var factory = ClipboardCommandFactory.Instance;
+            var factory = new ClipboardCommandFactory();
 
-            factory.RegisterCommand(new [] { Keys.Control, Keys.Alt, Keys.A }, command);
-            var commandFound = factory.FindCommand(new [] { Keys.Control, Keys.Alt, Keys.A });
+            factory.RegisterCommand(new TestHotKey("Ctrl+Alt+W"), command);
+            var commandFound = factory.FindCommand(new TestHotKey("Ctrl+Alt+W"));
 
             Assert.NotNull(commandFound);
             Assert.Equal(command, commandFound);
@@ -34,12 +24,12 @@ namespace ClipboardNavigator.Tests
         {
             var command = Mock.Of<IClipboardCommand>();
             var command2 = Mock.Of<IClipboardCommand>();
-            var factory = ClipboardCommandFactory.Instance;
+            var factory = new ClipboardCommandFactory();
 
-            factory.RegisterCommand(new [] { Keys.Control, Keys.Alt, Keys.A }, command);
+            factory.RegisterCommand(new TestHotKey("Ctrl+Alt+W"), command);
 
             Assert.Throws<CommandException>(() =>
-                factory.RegisterCommand(new[] { Keys.Control, Keys.Alt, Keys.A }, command2));
+                factory.RegisterCommand(new TestHotKey("Ctrl+Alt+W"), command2));
         }
     }
 }

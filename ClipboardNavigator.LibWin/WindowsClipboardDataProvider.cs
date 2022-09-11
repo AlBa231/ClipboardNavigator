@@ -1,7 +1,8 @@
 ﻿using System.Windows.Forms;
+using ClipboardNavigator.Lib;
 using WK.Libraries.SharpClipboardNS;
 
-namespace ClipboardNavigator.Lib
+namespace ClipboardNavigator.LibWin
 {
     public class WindowsClipboardDataProvider : IClipboardDataProvider
     {
