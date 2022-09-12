@@ -62,6 +62,7 @@
             // 
             // lbClipboardHistory
             // 
+            this.lbClipboardHistory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lbClipboardHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lbClipboardHistory.FormattingEnabled = true;
             this.lbClipboardHistory.ItemHeight = 20;
@@ -70,6 +71,7 @@
             this.lbClipboardHistory.Name = "lbClipboardHistory";
             this.lbClipboardHistory.Size = new System.Drawing.Size(228, 520);
             this.lbClipboardHistory.TabIndex = 1;
+            this.lbClipboardHistory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbClipboardHistory_MouseClick);
             // 
             // toolStrip1
             // 
@@ -114,14 +116,14 @@
             // settingsToolStripMenuItem1
             // 
             this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(224, 26);
+            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(145, 26);
             this.settingsToolStripMenuItem1.Text = "Settings";
             this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
