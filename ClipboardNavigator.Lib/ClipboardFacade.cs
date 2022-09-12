@@ -6,11 +6,17 @@ namespace ClipboardNavigator.Lib
     {
         private readonly IClipboardDataProvider clipboardDataProvider;
         public BindingList<ClipboardData> History { get; } = new();
+        private bool ignoreDuplicates;
 
         public ClipboardData CurrentValue
         {
             get => clipboardDataProvider.GetCurrentValue();
-            set => clipboardDataProvider.SetCurrentValue(value);
+            set
+            {
+                ignoreDuplicates = true;
+                clipboardDataProvider.SetCurrentValue(value);
+                ignoreDuplicates = false;
+            }
         }
 
         public ClipboardFacade(IClipboardDataProvider clipboardDataProvider)
@@ -24,8 +30,14 @@ namespace ClipboardNavigator.Lib
         private void ClipboardDataProvider_Changed(ClipboardData data)
         {
             if (Equals(data, History.FirstOrDefault())) return;
+            if (IsDuplicateItem(data)) return;
 
            History.Insert(0, data);
+        }
+
+        private bool IsDuplicateItem(ClipboardData data)
+        {
+            return ignoreDuplicates || History.Contains(data);
         }
     }
 

@@ -52,6 +52,7 @@ namespace ClipboardNavigator
         {
             if (lbClipboardHistory.SelectedItem is ClipboardData item) 
                 clipboardFacade.CurrentValue = item;
+            UpdateTextField();
         }
 
         private void UpdateTextField()
