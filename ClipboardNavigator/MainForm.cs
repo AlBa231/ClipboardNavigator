@@ -5,7 +5,11 @@ namespace ClipboardNavigator
 {
     public partial class MainForm : Form
     {
-        private IClipboardFacade clipboardFacade;
+        private readonly IClipboardFacade clipboardFacade;
+        private TaskBarPopupForm? popupForm;
+        
+        private TaskBarPopupForm PopupForm => popupForm ??= new TaskBarPopupForm(clipboardFacade.History);
+
         public MainForm()
         {
             InitializeComponent();
@@ -40,14 +44,7 @@ namespace ClipboardNavigator
                 hideShowToolStripMenuItem_Click(sender, e);
             }
         }
-
-        private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (Visible)
-                Hide();
-            else Show();
-        }
-
+        
         private void lbClipboardHistory_MouseClick(object sender, MouseEventArgs e)
         {
             if (lbClipboardHistory.SelectedItem is ClipboardData item) 
@@ -59,6 +56,19 @@ namespace ClipboardNavigator
         {
             textBoxCurrentClipboard.Text = clipboardFacade.CurrentValue.Text;
             lbClipboardHistory.SelectedItem = clipboardFacade.CurrentValue;
+        }
+        
+        private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PopupForm.Show();
+            PopupForm.SetupLocation();
+        }
+
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (Visible)
+                Hide();
+            else Show();
         }
     }
 }
