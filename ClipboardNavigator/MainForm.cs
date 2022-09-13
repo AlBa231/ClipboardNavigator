@@ -14,8 +14,9 @@ namespace ClipboardNavigator
         {
             InitializeComponent();
             this.clipboardFacade = new ClipboardFacade(new WindowsClipboardDataProvider());
-            this.lbClipboardHistory.DataSource = this.clipboardFacade.History;
             clipboardFacade.History.ListChanged += (_, _) => UpdateTextField();
+            this.clipboardListBox.ClipboardFacade = this.clipboardFacade;
+            this.clipboardListBox.SelectionChanged += (v) => UpdateTextField();
             UpdateTextField();
         }
 
@@ -44,18 +45,11 @@ namespace ClipboardNavigator
                 hideShowToolStripMenuItem_Click(sender, e);
             }
         }
-        
-        private void lbClipboardHistory_MouseClick(object sender, MouseEventArgs e)
-        {
-            if (lbClipboardHistory.SelectedItem is ClipboardData item) 
-                clipboardFacade.CurrentValue = item;
-            UpdateTextField();
-        }
 
         private void UpdateTextField()
         {
             textBoxCurrentClipboard.Text = clipboardFacade.CurrentValue.Text;
-            lbClipboardHistory.SelectedItem = clipboardFacade.CurrentValue;
+            clipboardListBox.SelectedItem = clipboardFacade.CurrentValue;
         }
         
         private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)

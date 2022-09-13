@@ -42,6 +42,7 @@
             this.lbClipboardHistory.Name = "lbClipboardHistory";
             this.lbClipboardHistory.Size = new System.Drawing.Size(359, 535);
             this.lbClipboardHistory.TabIndex = 2;
+            this.lbClipboardHistory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbClipboardHistory_MouseClick);
             // 
             // ClipboardListBox
             // 

@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.lbClipboardHistory = new System.Windows.Forms.ListBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
@@ -49,6 +48,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHide = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
+            this.clipboardListBox = new ClipboardNavigator.ClipboardListBox();
             this.toolStrip1.SuspendLayout();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -59,19 +59,6 @@
             this.contextMenuNotifyIcon.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // lbClipboardHistory
-            // 
-            this.lbClipboardHistory.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lbClipboardHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbClipboardHistory.FormattingEnabled = true;
-            this.lbClipboardHistory.ItemHeight = 20;
-            this.lbClipboardHistory.Location = new System.Drawing.Point(0, 0);
-            this.lbClipboardHistory.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.lbClipboardHistory.Name = "lbClipboardHistory";
-            this.lbClipboardHistory.Size = new System.Drawing.Size(228, 520);
-            this.lbClipboardHistory.TabIndex = 1;
-            this.lbClipboardHistory.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lbClipboardHistory_MouseClick);
             // 
             // toolStrip1
             // 
@@ -139,7 +126,7 @@
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.lbClipboardHistory);
+            this.splitContainer.Panel2.Controls.Add(this.clipboardListBox);
             this.splitContainer.Size = new System.Drawing.Size(755, 520);
             this.splitContainer.SplitterDistance = 523;
             this.splitContainer.TabIndex = 4;
@@ -242,6 +229,14 @@
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             // 
+            // clipboardListBox
+            // 
+            this.clipboardListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clipboardListBox.Location = new System.Drawing.Point(0, 0);
+            this.clipboardListBox.Name = "clipboardListBox";
+            this.clipboardListBox.Size = new System.Drawing.Size(228, 520);
+            this.clipboardListBox.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -280,7 +275,6 @@
         }
 
         #endregion
-        private ListBox lbClipboardHistory;
         private ToolStrip toolStrip1;
         private ToolStripButton toolStripButton1;
         private MenuStrip mainMenu;
@@ -299,5 +293,6 @@
         private Button btnOk;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem1;
+        private ClipboardListBox clipboardListBox;
     }
 }
