@@ -36,5 +36,16 @@ namespace ClipboardNavigator
         {
 
         }
+
+        public void ToggleVisibility()
+        {
+            if (Visible) 
+                Hide();
+            else
+            {
+                Show();
+                SetupLocation();
+            }
+        }
     }
 }

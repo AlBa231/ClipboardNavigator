@@ -54,8 +54,7 @@ namespace ClipboardNavigator
         
         private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PopupForm.Show();
-            PopupForm.SetupLocation();
+            PopupForm.ToggleVisibility();
         }
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
