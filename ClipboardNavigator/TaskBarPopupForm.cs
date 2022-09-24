@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using ClipboardNavigator.Lib;
+﻿using ClipboardNavigator.Lib;
 
 namespace ClipboardNavigator
 {
     public partial class TaskBarPopupForm : Form
     {
-        public TaskBarPopupForm(BindingList<ClipboardData> clipboardHistory)
+        public TaskBarPopupForm(IClipboardFacade clipboardHistory)
         {
+            if (clipboardHistory == null) throw new ArgumentNullException(nameof(clipboardHistory));
             InitializeComponent();
-            lbClipboardHistory.DataSource = clipboardHistory;
+            clipboardListBox.ClipboardFacade = clipboardHistory;
         }
 
         public void SetupLocation()
@@ -38,6 +30,11 @@ namespace ClipboardNavigator
         private void TaskBarPopupForm_MouseLeave(object sender, EventArgs e)
         {
             timerHideForm.Start();
+        }
+
+        private void TaskBarPopupForm_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

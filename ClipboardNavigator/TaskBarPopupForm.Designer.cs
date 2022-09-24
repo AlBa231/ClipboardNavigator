@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.timerHideForm = new System.Windows.Forms.Timer(this.components);
-            this.lbClipboardHistory = new System.Windows.Forms.ListBox();
+            this.clipboardListBox = new ClipboardNavigator.ClipboardListBox();
             this.SuspendLayout();
             // 
             // timerHideForm
@@ -38,15 +38,17 @@
             this.timerHideForm.Interval = 2000;
             this.timerHideForm.Tick += new System.EventHandler(this.timerHideForm_Tick);
             // 
-            // lbClipboardHistory
+            // clipboardListBox
             // 
-            this.lbClipboardHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbClipboardHistory.FormattingEnabled = true;
-            this.lbClipboardHistory.ItemHeight = 20;
-            this.lbClipboardHistory.Location = new System.Drawing.Point(0, 0);
-            this.lbClipboardHistory.Name = "lbClipboardHistory";
-            this.lbClipboardHistory.Size = new System.Drawing.Size(357, 480);
-            this.lbClipboardHistory.TabIndex = 0;
+            this.clipboardListBox.ClipboardFacade = null;
+            this.clipboardListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clipboardListBox.Location = new System.Drawing.Point(0, 0);
+            this.clipboardListBox.Name = "clipboardListBox";
+            this.clipboardListBox.SelectedItem = null;
+            this.clipboardListBox.Size = new System.Drawing.Size(357, 480);
+            this.clipboardListBox.TabIndex = 1;
+            this.clipboardListBox.MouseEnter += new System.EventHandler(this.TaskBarPopupForm_MouseEnter);
+            this.clipboardListBox.MouseLeave += new System.EventHandler(this.TaskBarPopupForm_MouseLeave);
             // 
             // TaskBarPopupForm
             // 
@@ -54,7 +56,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(357, 480);
             this.ControlBox = false;
-            this.Controls.Add(this.lbClipboardHistory);
+            this.Controls.Add(this.clipboardListBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -64,8 +66,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "TaskBarPopupForm";
             this.TopMost = true;
-            this.MouseEnter += new System.EventHandler(this.TaskBarPopupForm_MouseEnter);
-            this.MouseLeave += new System.EventHandler(this.TaskBarPopupForm_MouseLeave);
+            this.Enter += new System.EventHandler(this.TaskBarPopupForm_Enter);
             this.ResumeLayout(false);
 
         }
@@ -73,6 +74,6 @@
         #endregion
 
         private System.Windows.Forms.Timer timerHideForm;
-        private ListBox lbClipboardHistory;
+        private ClipboardListBox clipboardListBox;
     }
 }

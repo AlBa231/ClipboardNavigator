@@ -40,7 +40,7 @@ namespace ClipboardNavigator
 
         private void Init()
         {
-            lbClipboardHistory.DataSource = ClipboardFacade.History;
+            lbClipboardHistory.DataSource = ClipboardFacade?.History;
         }
 
         private void lbClipboardHistory_MouseClick(object sender, MouseEventArgs e)

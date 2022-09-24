@@ -8,7 +8,7 @@ namespace ClipboardNavigator
         private readonly IClipboardFacade clipboardFacade;
         private TaskBarPopupForm? popupForm;
         
-        private TaskBarPopupForm PopupForm => popupForm ??= new TaskBarPopupForm(clipboardFacade.History);
+        private TaskBarPopupForm PopupForm => popupForm ??= new TaskBarPopupForm(clipboardFacade);
 
         public MainForm()
         {
