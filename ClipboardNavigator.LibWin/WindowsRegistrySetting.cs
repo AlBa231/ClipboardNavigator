@@ -4,7 +4,7 @@ using Application = System.Windows.Forms.Application;
 
 namespace ClipboardNavigator.LibWin
 {
-    internal class WindowsRegistrySetting : IRegistrySetting
+    public class WindowsRegistrySetting : IRegistrySetting
     {
         private readonly string registryKeyPath;
         private readonly string keyName;
@@ -37,7 +37,7 @@ namespace ClipboardNavigator.LibWin
         }
     }
 
-    internal class WindowsRunRegistrySetting : WindowsRegistrySetting
+    public class WindowsRunRegistrySetting : WindowsRegistrySetting
     {
         private const string RegistryRunPath = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
 

@@ -1,25 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using ClipboardNavigator.Lib;
+using ClipboardNavigator.LibWin;
 
-namespace ClipboardNavigator
+namespace ClipboardNavigator;
+
+public partial class SettingsForm : Form
 {
-    public partial class SettingsForm : Form
+    private readonly AutoRunRegistrySetting autoRunRegistry = new AutoRunRegistrySetting(Application.ExecutablePath,
+        new WindowsRunRegistrySetting());
+    public SettingsForm()
     {
-        public SettingsForm()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+        TryInitFields();
+    }
 
-        private void cbAutoStart_CheckedChanged(object sender, EventArgs e)
+    private void TryInitFields()
+    {
+        try
         {
-
+            InitFields();
         }
+        catch (Exception e)
+        {
+            MessageBox.Show(e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+    }
+
+    private void InitFields()
+    {
+        cbAutoStart.Checked = autoRunRegistry.IsAutoStart;
+    }
+
+    private void cbAutoStart_CheckedChanged(object sender, EventArgs e)
+    {
+        autoRunRegistry.IsAutoStart = cbAutoStart.Checked;
     }
 }

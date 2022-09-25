@@ -38,6 +38,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.textBoxCurrentClipboard = new System.Windows.Forms.TextBox();
+            this.clipboardListBox = new ClipboardNavigator.ClipboardListBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -48,7 +49,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnHide = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.clipboardListBox = new ClipboardNavigator.ClipboardListBox();
             this.toolStrip1.SuspendLayout();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -141,6 +141,16 @@
             this.textBoxCurrentClipboard.Size = new System.Drawing.Size(523, 520);
             this.textBoxCurrentClipboard.TabIndex = 0;
             // 
+            // clipboardListBox
+            // 
+            this.clipboardListBox.ClipboardFacade = null;
+            this.clipboardListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.clipboardListBox.Location = new System.Drawing.Point(0, 0);
+            this.clipboardListBox.Name = "clipboardListBox";
+            this.clipboardListBox.SelectedItem = null;
+            this.clipboardListBox.Size = new System.Drawing.Size(228, 520);
+            this.clipboardListBox.TabIndex = 0;
+            // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
@@ -229,14 +239,6 @@
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
             // 
-            // clipboardListBox
-            // 
-            this.clipboardListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clipboardListBox.Location = new System.Drawing.Point(0, 0);
-            this.clipboardListBox.Name = "clipboardListBox";
-            this.clipboardListBox.Size = new System.Drawing.Size(228, 520);
-            this.clipboardListBox.TabIndex = 0;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -254,7 +256,6 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "MainForm";
             this.Text = "Clipboard Navigator";
-            this.TopMost = true;
             this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.MainForm_PreviewKeyDown);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

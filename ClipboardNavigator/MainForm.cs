@@ -35,7 +35,8 @@ namespace ClipboardNavigator
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            new SettingsForm().ShowDialog();
+            var settingsForm = new SettingsForm();
+            settingsForm.ShowDialog();
         }
 
         private void notifyIcon_MouseClick(object sender, MouseEventArgs e)
