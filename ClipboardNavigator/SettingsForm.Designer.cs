@@ -40,6 +40,7 @@
             this.cbAutoStart.TabIndex = 0;
             this.cbAutoStart.Text = "Auto Start with Windows";
             this.cbAutoStart.UseVisualStyleBackColor = true;
+            this.cbAutoStart.CheckedChanged += new System.EventHandler(this.cbAutoStart_CheckedChanged);
             // 
             // SettingsForm
             // 

@@ -14,6 +14,12 @@ public class AutoRunRegistrySetting
     public bool IsAutoStart
     {
         get => registrySetting.RunPath == appPath;
-        set => registrySetting.RunPath = value ? appPath : null;
+        set => UpdateRegistryValueIfChanged(value ? appPath : null);
+    }
+
+    private void UpdateRegistryValueIfChanged(string? path)
+    {
+        if (registrySetting.RunPath == path) return;
+        registrySetting.RunPath = path;
     }
 }

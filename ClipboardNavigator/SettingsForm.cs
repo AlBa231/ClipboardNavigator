@@ -16,5 +16,10 @@ namespace ClipboardNavigator
         {
             InitializeComponent();
         }
+
+        private void cbAutoStart_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
