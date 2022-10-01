@@ -18,7 +18,12 @@ namespace ClipboardNavigator.LibWin
         private void Clipboard_ClipboardChanged(object? sender, SharpClipboard.ClipboardChangedEventArgs e)
         {
             if (e.ContentType == SharpClipboard.ContentTypes.Text)
-                Changed?.Invoke(new ClipboardData((string)e.Content));
+                NotifyNewTextCopied((string)e.Content);
+        }
+
+        private void NotifyNewTextCopied(string text)
+        {
+            Changed?.Invoke(new ClipboardData(text));
         }
 
         public ClipboardData GetCurrentValue()

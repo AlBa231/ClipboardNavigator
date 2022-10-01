@@ -13,11 +13,18 @@ namespace ClipboardNavigator
         public MainForm()
         {
             InitializeComponent();
-            this.clipboardFacade = new ClipboardFacade(new WindowsClipboardDataProvider());
+            this.clipboardFacade = InitFacade();
             clipboardFacade.History.ListChanged += (_, _) => UpdateTextField();
             this.clipboardListBox.ClipboardFacade = this.clipboardFacade;
             this.clipboardListBox.SelectionChanged += (v) => UpdateTextField();
             UpdateTextField();
+        }
+
+        private ClipboardFacade InitFacade()
+        {
+            var clipboardDataProvider = new WindowsClipboardDataProvider();
+            clipboardDataProvider.Changed += (text) => notifyIcon.ShowBalloonTip(2000, null, text.Text, ToolTipIcon.None);
+            return new ClipboardFacade(clipboardDataProvider);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

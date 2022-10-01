@@ -170,6 +170,8 @@
             // 
             // notifyIcon
             // 
+            this.notifyIcon.BalloonTipText = "test";
+            this.notifyIcon.BalloonTipTitle = "asas";
             this.notifyIcon.ContextMenuStrip = this.contextMenuNotifyIcon;
             this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
             this.notifyIcon.Text = "Clipboard Navigator";
