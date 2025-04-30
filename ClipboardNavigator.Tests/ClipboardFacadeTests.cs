@@ -1,14 +1,18 @@
-﻿namespace ClipboardNavigator.Tests;
+﻿using ClipboardNavigator.Lib.Notification;
+
+namespace ClipboardNavigator.Tests;
 
 public class ClipboardFacadeTests
 {
+    private readonly Mock<INotificationService> mockNotificationService = new();
+
     [Fact]
     public void TestClipboardFacadeGetItems()
     {
         var testData = new ClipboardData("test data");
         // ReSharper disable once PossibleUnintendedReferenceComparison
         var dataProvider = Mock.Of<IClipboardDataProvider>(p => p.GetCurrentValue() == testData);
-        IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider);
+        IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider, mockNotificationService.Object);
 
         var items = clipboardFacade.History;
 
@@ -23,7 +27,7 @@ public class ClipboardFacadeTests
         var testData2 = new ClipboardData("test data 2");
         // ReSharper disable once PossibleUnintendedReferenceComparison
         var dataProvider = Mock.Of<IClipboardDataProvider>(p => p.GetCurrentValue() == testData);
-        IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider);
+        IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider, mockNotificationService.Object);
 
         Mock.Get(dataProvider).Raise(m=>m.Changed += null, testData2);
 
@@ -43,7 +47,7 @@ public class ClipboardFacadeTests
         dataProvider.Setup(p=>p.SetCurrentValue(It.IsAny<ClipboardData>()))
             .Raises(p => p.Changed += null, 
                 new ClipboardData("test"));
-        IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider.Object);
+        IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider.Object, mockNotificationService.Object);
 
         dataProvider.Raise(m=>m.Changed += null, new ClipboardData("test data 2"));
         clipboardFacade.CurrentValue = new ClipboardData("test data 2");

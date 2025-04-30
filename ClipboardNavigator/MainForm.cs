@@ -7,7 +7,7 @@ namespace ClipboardNavigator
     {
         private readonly IClipboardFacade clipboardFacade;
         private TaskBarPopupForm? popupForm;
-        
+
         private TaskBarPopupForm PopupForm => popupForm ??= new TaskBarPopupForm(clipboardFacade);
 
         public MainForm()
@@ -23,13 +23,13 @@ namespace ClipboardNavigator
         private ClipboardFacade InitFacade()
         {
             var clipboardDataProvider = new WindowsClipboardDataProvider();
-            clipboardDataProvider.Changed += (text) => notifyIcon.ShowBalloonTip(2000, null, text.Text, ToolTipIcon.None);
-            return new ClipboardFacade(clipboardDataProvider);
+            return new ClipboardFacade(clipboardDataProvider, new NotifyIconNotificationService(notifyIcon));
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
+            Application.Exit();
         }
 
         private void MainForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -59,13 +59,27 @@ namespace ClipboardNavigator
             textBoxCurrentClipboard.Text = clipboardFacade.CurrentValue.Text;
             clipboardListBox.SelectedItem = clipboardFacade.CurrentValue;
         }
-        
+
         private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             PopupForm.ToggleVisibility();
         }
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            showHideMainWindowToolStripMenuItem_Click(sender, e);
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
+            {
+                e.Cancel = true;
+                Hide();
+            }
+        }
+
+        private void showHideMainWindowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Visible)
                 Hide();

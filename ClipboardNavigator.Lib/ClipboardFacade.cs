@@ -1,12 +1,16 @@
 ﻿using System.ComponentModel;
+using ClipboardNavigator.Lib.Notification;
+using ClipboardNavigator.Lib.Scripts;
 
 namespace ClipboardNavigator.Lib
 {
     public class ClipboardFacade : IClipboardFacade
     {
         private readonly IClipboardDataProvider clipboardDataProvider;
-        public BindingList<ClipboardData> History { get; } = new();
+        public BindingList<ClipboardData> History { get; } = [];
         private bool ignoreDuplicates;
+        private readonly IScriptFactory scriptFactory;
+        private readonly INotificationService notificationService;
 
         public ClipboardData CurrentValue
         {
@@ -19,9 +23,11 @@ namespace ClipboardNavigator.Lib
             }
         }
 
-        public ClipboardFacade(IClipboardDataProvider clipboardDataProvider)
+        public ClipboardFacade(IClipboardDataProvider clipboardDataProvider, INotificationService notificationService)
         {
             this.clipboardDataProvider = clipboardDataProvider ?? throw new ArgumentNullException(nameof(clipboardDataProvider));
+            this.notificationService = notificationService;
+            this.scriptFactory = new ScriptFactory(notificationService);
             this.clipboardDataProvider.Changed += ClipboardDataProvider_Changed;
             if (!string.IsNullOrWhiteSpace(CurrentValue?.Text))
                 History.Add(CurrentValue);
@@ -29,10 +35,18 @@ namespace ClipboardNavigator.Lib
 
         private void ClipboardDataProvider_Changed(ClipboardData data)
         {
+            scriptFactory.ProcessPostCopyHook(data);
+            UpdateClipboardHistory(data);
+        }
+
+        private void UpdateClipboardHistory(ClipboardData data)
+        {
             if (Equals(data, History.FirstOrDefault())) return;
             if (IsDuplicateItem(data)) return;
 
-           History.Insert(0, data);
+            History.Insert(0, data);
+            if (AppSettings.Instance.DisplayNewDataNotification)
+                notificationService.ShowBalloonText(data.Text);
         }
 
         private bool IsDuplicateItem(ClipboardData data)

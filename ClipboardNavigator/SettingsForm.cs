@@ -5,8 +5,7 @@ namespace ClipboardNavigator;
 
 public partial class SettingsForm : Form
 {
-    private readonly AutoRunRegistrySetting autoRunRegistry = new AutoRunRegistrySetting(Application.ExecutablePath,
-        new WindowsRunRegistrySetting());
+    private readonly AutoRunRegistrySetting autoRunRegistry = new(Application.ExecutablePath, new WindowsRunRegistrySetting());
     public SettingsForm()
     {
         InitializeComponent();

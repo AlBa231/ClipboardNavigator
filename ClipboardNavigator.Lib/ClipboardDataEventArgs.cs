@@ -8,4 +8,6 @@ public class ClipboardDataEventArgs : EventArgs
     }
 
     public ClipboardData Data { get; }
+
+    public bool StopOtherScripts { get; set; }
 }

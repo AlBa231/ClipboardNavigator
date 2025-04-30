@@ -28,252 +28,252 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.mainMenu = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.splitContainer = new System.Windows.Forms.SplitContainer();
-            this.textBoxCurrentClipboard = new System.Windows.Forms.TextBox();
-            this.clipboardListBox = new ClipboardNavigator.ClipboardListBox();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuNotifyIcon = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.hideShowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.btnHide = new System.Windows.Forms.Button();
-            this.btnOk = new System.Windows.Forms.Button();
-            this.toolStrip1.SuspendLayout();
-            this.mainMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
-            this.splitContainer.Panel1.SuspendLayout();
-            this.splitContainer.Panel2.SuspendLayout();
-            this.splitContainer.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
-            this.contextMenuNotifyIcon.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            toolStrip1 = new ToolStrip();
+            toolStripButton1 = new ToolStripButton();
+            mainMenu = new MenuStrip();
+            fileToolStripMenuItem = new ToolStripMenuItem();
+            settingsToolStripMenuItem1 = new ToolStripMenuItem();
+            exitToolStripMenuItem = new ToolStripMenuItem();
+            splitContainer = new SplitContainer();
+            textBoxCurrentClipboard = new TextBox();
+            clipboardListBox = new ClipboardListBox();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel1 = new ToolStripStatusLabel();
+            notifyIcon = new NotifyIcon(components);
+            contextMenuNotifyIcon = new ContextMenuStrip(components);
+            hideShowToolStripMenuItem = new ToolStripMenuItem();
+            settingsToolStripMenuItem = new ToolStripMenuItem();
+            exitToolStripMenuItem1 = new ToolStripMenuItem();
+            panel1 = new Panel();
+            btnHide = new Button();
+            btnOk = new Button();
+            showHideMainWindowToolStripMenuItem = new ToolStripMenuItem();
+            toolStrip1.SuspendLayout();
+            mainMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
+            splitContainer.Panel1.SuspendLayout();
+            splitContainer.Panel2.SuspendLayout();
+            splitContainer.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            contextMenuNotifyIcon.SuspendLayout();
+            panel1.SuspendLayout();
+            SuspendLayout();
             // 
             // toolStrip1
             // 
-            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(755, 27);
-            this.toolStrip1.TabIndex = 2;
-            this.toolStrip1.Text = "toolStrip1";
+            toolStrip1.ImageScalingSize = new Size(20, 20);
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton1 });
+            toolStrip1.Location = new Point(0, 28);
+            toolStrip1.Name = "toolStrip1";
+            toolStrip1.Size = new Size(755, 27);
+            toolStrip1.TabIndex = 2;
+            toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButton1
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(29, 24);
-            this.toolStripButton1.Text = "toolStripButton1";
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(29, 24);
+            toolStripButton1.Text = "toolStripButton1";
             // 
             // mainMenu
             // 
-            this.mainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.mainMenu.Location = new System.Drawing.Point(0, 0);
-            this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(755, 28);
-            this.mainMenu.TabIndex = 3;
-            this.mainMenu.Text = "mainMenu";
+            mainMenu.ImageScalingSize = new Size(20, 20);
+            mainMenu.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+            mainMenu.Location = new Point(0, 0);
+            mainMenu.Name = "mainMenu";
+            mainMenu.Size = new Size(755, 28);
+            mainMenu.TabIndex = 3;
+            mainMenu.Text = "mainMenu";
             // 
             // fileToolStripMenuItem
             // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.settingsToolStripMenuItem1,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
-            this.fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { settingsToolStripMenuItem1, exitToolStripMenuItem });
+            fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            fileToolStripMenuItem.Size = new Size(46, 24);
+            fileToolStripMenuItem.Text = "File";
             // 
             // settingsToolStripMenuItem1
             // 
-            this.settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
-            this.settingsToolStripMenuItem1.Size = new System.Drawing.Size(145, 26);
-            this.settingsToolStripMenuItem1.Text = "Settings";
-            this.settingsToolStripMenuItem1.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            settingsToolStripMenuItem1.Name = "settingsToolStripMenuItem1";
+            settingsToolStripMenuItem1.Size = new Size(145, 26);
+            settingsToolStripMenuItem1.Text = "Settings";
+            settingsToolStripMenuItem1.Click += settingsToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(145, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            exitToolStripMenuItem.Size = new Size(145, 26);
+            exitToolStripMenuItem.Text = "Exit";
+            exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // splitContainer
             // 
-            this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer.Location = new System.Drawing.Point(0, 55);
-            this.splitContainer.Name = "splitContainer";
+            splitContainer.Dock = DockStyle.Fill;
+            splitContainer.Location = new Point(0, 55);
+            splitContainer.Name = "splitContainer";
             // 
             // splitContainer.Panel1
             // 
-            this.splitContainer.Panel1.Controls.Add(this.textBoxCurrentClipboard);
+            splitContainer.Panel1.Controls.Add(textBoxCurrentClipboard);
             // 
             // splitContainer.Panel2
             // 
-            this.splitContainer.Panel2.Controls.Add(this.clipboardListBox);
-            this.splitContainer.Size = new System.Drawing.Size(755, 520);
-            this.splitContainer.SplitterDistance = 523;
-            this.splitContainer.TabIndex = 4;
+            splitContainer.Panel2.Controls.Add(clipboardListBox);
+            splitContainer.Size = new Size(755, 520);
+            splitContainer.SplitterDistance = 523;
+            splitContainer.TabIndex = 4;
             // 
             // textBoxCurrentClipboard
             // 
-            this.textBoxCurrentClipboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxCurrentClipboard.Location = new System.Drawing.Point(0, 0);
-            this.textBoxCurrentClipboard.Multiline = true;
-            this.textBoxCurrentClipboard.Name = "textBoxCurrentClipboard";
-            this.textBoxCurrentClipboard.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxCurrentClipboard.Size = new System.Drawing.Size(523, 520);
-            this.textBoxCurrentClipboard.TabIndex = 0;
+            textBoxCurrentClipboard.Dock = DockStyle.Fill;
+            textBoxCurrentClipboard.Location = new Point(0, 0);
+            textBoxCurrentClipboard.Multiline = true;
+            textBoxCurrentClipboard.Name = "textBoxCurrentClipboard";
+            textBoxCurrentClipboard.ScrollBars = ScrollBars.Both;
+            textBoxCurrentClipboard.Size = new Size(523, 520);
+            textBoxCurrentClipboard.TabIndex = 0;
             // 
             // clipboardListBox
             // 
-            this.clipboardListBox.ClipboardFacade = null;
-            this.clipboardListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.clipboardListBox.Location = new System.Drawing.Point(0, 0);
-            this.clipboardListBox.Name = "clipboardListBox";
-            this.clipboardListBox.SelectedItem = null;
-            this.clipboardListBox.Size = new System.Drawing.Size(228, 520);
-            this.clipboardListBox.TabIndex = 0;
+            clipboardListBox.ClipboardFacade = null;
+            clipboardListBox.Dock = DockStyle.Fill;
+            clipboardListBox.Location = new Point(0, 0);
+            clipboardListBox.Name = "clipboardListBox";
+            clipboardListBox.SelectedItem = null;
+            clipboardListBox.Size = new Size(228, 520);
+            clipboardListBox.TabIndex = 0;
             // 
             // statusStrip1
             // 
-            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 549);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(755, 26);
-            this.statusStrip1.TabIndex = 5;
-            this.statusStrip1.Text = "statusStrip1";
+            statusStrip1.ImageScalingSize = new Size(20, 20);
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel1 });
+            statusStrip1.Location = new Point(0, 549);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(755, 26);
+            statusStrip1.TabIndex = 5;
+            statusStrip1.Text = "statusStrip1";
             // 
             // toolStripStatusLabel1
             // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(55, 20);
-            this.toolStripStatusLabel1.Text = "Rows:0";
+            toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            toolStripStatusLabel1.Size = new Size(55, 20);
+            toolStripStatusLabel1.Text = "Rows:0";
             // 
             // notifyIcon
             // 
-            this.notifyIcon.BalloonTipText = "test";
-            this.notifyIcon.BalloonTipTitle = "asas";
-            this.notifyIcon.ContextMenuStrip = this.contextMenuNotifyIcon;
-            this.notifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon.Icon")));
-            this.notifyIcon.Text = "Clipboard Navigator";
-            this.notifyIcon.Visible = true;
-            this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
-            this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
+            notifyIcon.BalloonTipText = "test";
+            notifyIcon.ContextMenuStrip = contextMenuNotifyIcon;
+            notifyIcon.Icon = (Icon)resources.GetObject("notifyIcon.Icon");
+            notifyIcon.Text = "Clipboard Navigator";
+            notifyIcon.Visible = true;
+            notifyIcon.MouseClick += notifyIcon_MouseClick;
+            notifyIcon.MouseDoubleClick += notifyIcon_MouseDoubleClick;
             // 
             // contextMenuNotifyIcon
             // 
-            this.contextMenuNotifyIcon.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuNotifyIcon.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.hideShowToolStripMenuItem,
-            this.settingsToolStripMenuItem,
-            this.exitToolStripMenuItem1});
-            this.contextMenuNotifyIcon.Name = "contextMenuStrip2";
-            this.contextMenuNotifyIcon.Size = new System.Drawing.Size(156, 76);
+            contextMenuNotifyIcon.ImageScalingSize = new Size(20, 20);
+            contextMenuNotifyIcon.Items.AddRange(new ToolStripItem[] { hideShowToolStripMenuItem, showHideMainWindowToolStripMenuItem, settingsToolStripMenuItem, exitToolStripMenuItem1 });
+            contextMenuNotifyIcon.Name = "contextMenuStrip2";
+            contextMenuNotifyIcon.Size = new Size(246, 128);
             // 
             // hideShowToolStripMenuItem
             // 
-            this.hideShowToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.hideShowToolStripMenuItem.Name = "hideShowToolStripMenuItem";
-            this.hideShowToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
-            this.hideShowToolStripMenuItem.Text = "Hide/Show";
-            this.hideShowToolStripMenuItem.Click += new System.EventHandler(this.hideShowToolStripMenuItem_Click);
+            hideShowToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            hideShowToolStripMenuItem.Name = "hideShowToolStripMenuItem";
+            hideShowToolStripMenuItem.Size = new Size(245, 24);
+            hideShowToolStripMenuItem.Text = "Hide/Show";
+            hideShowToolStripMenuItem.Click += hideShowToolStripMenuItem_Click;
             // 
             // settingsToolStripMenuItem
             // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(155, 24);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            settingsToolStripMenuItem.Size = new Size(245, 24);
+            settingsToolStripMenuItem.Text = "Settings";
+            settingsToolStripMenuItem.Click += settingsToolStripMenuItem_Click;
             // 
             // exitToolStripMenuItem1
             // 
-            this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(155, 24);
-            this.exitToolStripMenuItem1.Text = "Exit";
-            this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
+            exitToolStripMenuItem1.Size = new Size(245, 24);
+            exitToolStripMenuItem1.Text = "Exit";
+            exitToolStripMenuItem1.Click += exitToolStripMenuItem_Click;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnHide);
-            this.panel1.Controls.Add(this.btnOk);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 512);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(755, 37);
-            this.panel1.TabIndex = 6;
+            panel1.Controls.Add(btnHide);
+            panel1.Controls.Add(btnOk);
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(0, 512);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(755, 37);
+            panel1.TabIndex = 6;
             // 
             // btnHide
             // 
-            this.btnHide.Location = new System.Drawing.Point(370, 3);
-            this.btnHide.Name = "btnHide";
-            this.btnHide.Size = new System.Drawing.Size(94, 29);
-            this.btnHide.TabIndex = 0;
-            this.btnHide.Text = "Cancel";
-            this.btnHide.UseVisualStyleBackColor = true;
-            this.btnHide.Click += new System.EventHandler(this.hideShowToolStripMenuItem_Click);
+            btnHide.Location = new Point(370, 3);
+            btnHide.Name = "btnHide";
+            btnHide.Size = new Size(94, 29);
+            btnHide.TabIndex = 0;
+            btnHide.Text = "Cancel";
+            btnHide.UseVisualStyleBackColor = true;
+            btnHide.Click += hideShowToolStripMenuItem_Click;
             // 
             // btnOk
             // 
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(250, 3);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(94, 29);
-            this.btnOk.TabIndex = 0;
-            this.btnOk.Text = "OK";
-            this.btnOk.UseVisualStyleBackColor = true;
+            btnOk.DialogResult = DialogResult.OK;
+            btnOk.Location = new Point(250, 3);
+            btnOk.Name = "btnOk";
+            btnOk.Size = new Size(94, 29);
+            btnOk.TabIndex = 0;
+            btnOk.Text = "OK";
+            btnOk.UseVisualStyleBackColor = true;
+            // 
+            // showHideMainWindowToolStripMenuItem
+            // 
+            showHideMainWindowToolStripMenuItem.Name = "showHideMainWindowToolStripMenuItem";
+            showHideMainWindowToolStripMenuItem.Size = new Size(245, 24);
+            showHideMainWindowToolStripMenuItem.Text = "Show/Hide Main window";
+            showHideMainWindowToolStripMenuItem.Click += showHideMainWindowToolStripMenuItem_Click;
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.btnHide;
-            this.ClientSize = new System.Drawing.Size(755, 575);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.splitContainer);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.mainMenu);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.KeyPreview = true;
-            this.MainMenuStrip = this.mainMenu;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "MainForm";
-            this.Text = "Clipboard Navigator";
-            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.MainForm_PreviewKeyDown);
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
-            this.mainMenu.ResumeLayout(false);
-            this.mainMenu.PerformLayout();
-            this.splitContainer.Panel1.ResumeLayout(false);
-            this.splitContainer.Panel1.PerformLayout();
-            this.splitContainer.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
-            this.splitContainer.ResumeLayout(false);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.contextMenuNotifyIcon.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            CancelButton = btnHide;
+            ClientSize = new Size(755, 575);
+            Controls.Add(panel1);
+            Controls.Add(statusStrip1);
+            Controls.Add(splitContainer);
+            Controls.Add(toolStrip1);
+            Controls.Add(mainMenu);
+            Icon = (Icon)resources.GetObject("$this.Icon");
+            KeyPreview = true;
+            MainMenuStrip = mainMenu;
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "MainForm";
+            Text = "Clipboard Navigator";
+            FormClosing += MainForm_FormClosing;
+            PreviewKeyDown += MainForm_PreviewKeyDown;
+            toolStrip1.ResumeLayout(false);
+            toolStrip1.PerformLayout();
+            mainMenu.ResumeLayout(false);
+            mainMenu.PerformLayout();
+            splitContainer.Panel1.ResumeLayout(false);
+            splitContainer.Panel1.PerformLayout();
+            splitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer).EndInit();
+            splitContainer.ResumeLayout(false);
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            contextMenuNotifyIcon.ResumeLayout(false);
+            panel1.ResumeLayout(false);
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
@@ -297,5 +297,6 @@
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem settingsToolStripMenuItem1;
         private ClipboardListBox clipboardListBox;
+        private ToolStripMenuItem showHideMainWindowToolStripMenuItem;
     }
 }
