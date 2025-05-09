@@ -50,6 +50,7 @@
             panel1 = new Panel();
             btnHide = new Button();
             btnOk = new Button();
+            btnLogin = new ToolStripButton();
             toolStripMain.SuspendLayout();
             mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
@@ -64,7 +65,7 @@
             // toolStripMain
             // 
             toolStripMain.ImageScalingSize = new Size(48, 48);
-            toolStripMain.Items.AddRange(new ToolStripItem[] { btnSettings });
+            toolStripMain.Items.AddRange(new ToolStripItem[] { btnLogin, btnSettings });
             toolStripMain.Location = new Point(0, 28);
             toolStripMain.Name = "toolStripMain";
             toolStripMain.Size = new Size(755, 55);
@@ -240,6 +241,15 @@
             btnOk.Text = "OK";
             btnOk.UseVisualStyleBackColor = true;
             // 
+            // btnLogin
+            // 
+            btnLogin.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnLogin.Image = (Image)resources.GetObject("btnLogin.Image");
+            btnLogin.ImageTransparentColor = Color.Magenta;
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(52, 52);
+            btnLogin.Text = "Login with Google";
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -298,5 +308,6 @@
         private ToolStripMenuItem settingsToolStripMenuItem1;
         private ClipboardListBox clipboardListBox;
         private ToolStripMenuItem showHideMainWindowToolStripMenuItem;
+        private ToolStripButton btnLogin;
     }
 }
