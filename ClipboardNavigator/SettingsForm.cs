@@ -27,10 +27,17 @@ public partial class SettingsForm : Form
     private void InitFields()
     {
         cbAutoStart.Checked = autoRunRegistry.IsAutoStart;
+        cbAutoHide.Checked = autoRunRegistry.IsAutoStart && AppSettings.Instance.AutoHideOnStart;
     }
 
     private void cbAutoStart_CheckedChanged(object sender, EventArgs e)
     {
         autoRunRegistry.IsAutoStart = cbAutoStart.Checked;
+        cbAutoHide.Enabled = cbAutoStart.Checked;
+    }
+
+    private void cbAutoHide_CheckedChanged(object sender, EventArgs e)
+    {
+        AppSettings.Instance.AutoHideOnStart = cbAutoHide.Checked;
     }
 }

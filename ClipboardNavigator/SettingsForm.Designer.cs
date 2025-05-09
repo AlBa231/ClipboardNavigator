@@ -28,35 +28,50 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.cbAutoStart = new System.Windows.Forms.CheckBox();
-            this.SuspendLayout();
+            cbAutoStart = new CheckBox();
+            cbAutoHide = new CheckBox();
+            SuspendLayout();
             // 
             // cbAutoStart
             // 
-            this.cbAutoStart.AutoSize = true;
-            this.cbAutoStart.Location = new System.Drawing.Point(12, 12);
-            this.cbAutoStart.Name = "cbAutoStart";
-            this.cbAutoStart.Size = new System.Drawing.Size(195, 24);
-            this.cbAutoStart.TabIndex = 0;
-            this.cbAutoStart.Text = "Auto Start with Windows";
-            this.cbAutoStart.UseVisualStyleBackColor = true;
-            this.cbAutoStart.CheckedChanged += new System.EventHandler(this.cbAutoStart_CheckedChanged);
+            cbAutoStart.AutoSize = true;
+            cbAutoStart.Location = new Point(12, 12);
+            cbAutoStart.Name = "cbAutoStart";
+            cbAutoStart.Size = new Size(195, 24);
+            cbAutoStart.TabIndex = 0;
+            cbAutoStart.Text = "Auto Start with Windows";
+            cbAutoStart.UseVisualStyleBackColor = true;
+            cbAutoStart.CheckedChanged += cbAutoStart_CheckedChanged;
+            // 
+            // cbAutoHide
+            // 
+            cbAutoHide.AutoSize = true;
+            cbAutoHide.Enabled = false;
+            cbAutoHide.Location = new Point(34, 42);
+            cbAutoHide.Name = "cbAutoHide";
+            cbAutoHide.Size = new Size(112, 24);
+            cbAutoHide.TabIndex = 1;
+            cbAutoHide.Text = "Start hidden";
+            cbAutoHide.UseVisualStyleBackColor = true;
+            cbAutoHide.CheckedChanged += cbAutoHide_CheckedChanged;
             // 
             // SettingsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.cbAutoStart);
-            this.Name = "SettingsForm";
-            this.Text = "SettingsForm";
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(cbAutoHide);
+            Controls.Add(cbAutoStart);
+            Name = "SettingsForm";
+            Text = "SettingsForm";
+            ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
 
         private CheckBox cbAutoStart;
+        private CheckBox cbAutoHide;
     }
 }

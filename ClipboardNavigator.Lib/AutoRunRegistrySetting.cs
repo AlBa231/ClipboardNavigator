@@ -1,15 +1,9 @@
 ﻿namespace ClipboardNavigator.Lib;
 
-public class AutoRunRegistrySetting
+public class AutoRunRegistrySetting(string appPath, IRegistrySetting registrySetting)
 {
-    private readonly string appPath;
-    private readonly IRegistrySetting registrySetting;
-
-    public AutoRunRegistrySetting(string appPath, IRegistrySetting registrySetting)
-    {
-        this.appPath = appPath ?? throw new ArgumentNullException(nameof(appPath));
-        this.registrySetting = registrySetting ?? throw new ArgumentNullException(nameof(registrySetting));
-    }
+    private readonly string appPath = appPath ?? throw new ArgumentNullException(nameof(appPath));
+    private readonly IRegistrySetting registrySetting = registrySetting ?? throw new ArgumentNullException(nameof(registrySetting));
 
     public bool IsAutoStart
     {

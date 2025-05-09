@@ -18,6 +18,7 @@ namespace ClipboardNavigator
             this.clipboardListBox.ClipboardFacade = this.clipboardFacade;
             this.clipboardListBox.SelectionChanged += (v) => UpdateTextField();
             UpdateTextField();
+            if (AppSettings.Instance.AutoHideOnStart) Hide();
         }
 
         private ClipboardFacade InitFacade()
