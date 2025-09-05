@@ -14,7 +14,6 @@ namespace ClipboardNavigator
         {
             InitializeComponent();
             this.clipboardFacade = InitFacade();
-            clipboardFacade.History.ListChanged += (_, _) => UpdateTextField();
             this.clipboardListBox.ClipboardFacade = this.clipboardFacade;
             this.clipboardListBox.SelectionChanged += (v) => UpdateTextField();
             UpdateTextField();
@@ -24,7 +23,9 @@ namespace ClipboardNavigator
         private ClipboardFacade InitFacade()
         {
             var clipboardDataProvider = new WindowsClipboardDataProvider();
-            return new ClipboardFacade(clipboardDataProvider, new NotifyIconNotificationService(notifyIcon));
+            var facade = new ClipboardFacade(clipboardDataProvider, new NotifyIconNotificationService(notifyIcon));
+            facade.History.ListChanged += (_, _) => UpdateTextField();
+            return facade;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
