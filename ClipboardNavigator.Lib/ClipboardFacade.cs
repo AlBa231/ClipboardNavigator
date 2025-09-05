@@ -45,6 +45,8 @@ namespace ClipboardNavigator.Lib
             if (IsDuplicateItem(data)) return;
 
             History.Insert(0, data);
+            if (History.Count > AppSettings.Instance.MaxHistoryItems)
+                History.RemoveAt(History.Count - 1);
             if (AppSettings.Instance.DisplayNewDataNotification)
                 notificationService.ShowBalloonText(data.Text);
         }

@@ -5,4 +5,5 @@ public class AppSettings
 
     public bool DisplayNewDataNotification { get; set; }
     public bool AutoHideOnStart { get; set; } = true;
+    public int MaxHistoryItems { get; set; } = 50;
 }
