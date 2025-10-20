@@ -3,5 +3,5 @@
 public interface IIdleTimeService
 {
     uint GetIdleTime();
-    void ResetIdleTime();
+    Task ResetIdleTime(CancellationToken cancellationToken);
 }

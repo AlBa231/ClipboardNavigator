@@ -1,4 +1,5 @@
-﻿using ClipboardNavigator.LibWin.Plugins;
+﻿using System.Diagnostics;
+using ClipboardNavigator.LibWin.Plugins;
 
 namespace ClipboardNavigator.Lib.Plugins.BackgroundServices;
 public class ActivityKeeperPlugin(IIdleTimeService iddTimeService) : BackgroundServiceBase
@@ -7,11 +8,10 @@ public class ActivityKeeperPlugin(IIdleTimeService iddTimeService) : BackgroundS
 
     protected override int TickTimeoutSeconds => 15;
 
-    protected override Task ExecutePluginCheck()
+    protected override async Task ExecutePluginCheck(CancellationToken cancellationToken)
     {
         var idleTime = TimeSpan.FromMilliseconds(iddTimeService.GetIdleTime());
-        if (idleTime.Seconds > IdleTimeoutToResetSeconds)
-            iddTimeService.ResetIdleTime();
-        return Task.CompletedTask;
+        if (idleTime.TotalSeconds > IdleTimeoutToResetSeconds)
+            await iddTimeService.ResetIdleTime(cancellationToken);
     }
 }

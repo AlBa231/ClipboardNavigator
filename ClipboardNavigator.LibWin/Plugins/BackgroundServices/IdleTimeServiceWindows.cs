@@ -1,4 +1,7 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Diagnostics;
+using System.Drawing;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 using ClipboardNavigator.Lib.Exceptions;
 using ClipboardNavigator.Lib.Plugins.BackgroundServices;
 
@@ -6,6 +9,8 @@ namespace ClipboardNavigator.LibWin.Plugins.BackgroundServices;
 
 public class IdleTimeServiceWindows : IIdleTimeService
 {
+    private const int MouseMoveIdleResetMilliSeconds = 200;
+    private const int MouseMoveIdleResetTick = 10;
 
     [StructLayout(LayoutKind.Sequential)]
     struct LASTINPUTINFO
@@ -18,7 +23,7 @@ public class IdleTimeServiceWindows : IIdleTimeService
     static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
 
     [DllImport("user32.dll")]
-    static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, UIntPtr dwExtraInfo);
+    static extern void mouse_event(uint dwFlags, int dx, int dy, uint dwData, UIntPtr dwExtraInfo);
 
     const uint MOUSEEVENTF_MOVE = 0x0001;
 
@@ -27,14 +32,28 @@ public class IdleTimeServiceWindows : IIdleTimeService
         LASTINPUTINFO lastInput = new LASTINPUTINFO();
         lastInput.cbSize = (uint)Marshal.SizeOf(lastInput);
         if (!GetLastInputInfo(ref lastInput))
-            throw new AppException("Cannot retrieve iddle time");
+            throw new AppException("Cannot retrieve idle time");
 
         return (uint)Environment.TickCount - lastInput.dwTime;
     }
 
-    public void ResetIdleTime()
+    public async Task ResetIdleTime(CancellationToken cancellationToken)
     {
-        mouse_event(MOUSEEVENTF_MOVE, 0, 1, 0, UIntPtr.Zero);
-        mouse_event(MOUSEEVENTF_MOVE, 0, unchecked((uint)-1), 0, UIntPtr.Zero);
+        Point currentCursor = Cursor.Position;
+        for (var i = 0;
+             i < MouseMoveIdleResetMilliSeconds && !cancellationToken.IsCancellationRequested;
+             i += MouseMoveIdleResetTick)
+        {
+            MoveTo(10 + 2 * i, 1 + 2 * i);
+            await Task.Delay(MouseMoveIdleResetTick, cancellationToken);
+        }
+
+        Cursor.Position = currentCursor;
+    }
+
+    private static void MoveTo(int x, int y)
+    {
+        Debug.WriteLine($"Move mouse to X={x}.Y={y}");
+        mouse_event(MOUSEEVENTF_MOVE, x, y, 0, UIntPtr.Zero);
     }
 }

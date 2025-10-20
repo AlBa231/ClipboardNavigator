@@ -9,10 +9,10 @@ public abstract class BackgroundServiceBase: IBackgroundService
     {
         while (!cancellationToken.IsCancellationRequested)
         {
-            await ExecutePluginCheck();
+            await ExecutePluginCheck(cancellationToken);
             await Task.Delay(TimeSpan.FromSeconds(TickTimeoutSeconds), cancellationToken);
         }
     }
 
-    protected abstract Task ExecutePluginCheck();
+    protected abstract Task ExecutePluginCheck(CancellationToken cancellationToken);
 }
