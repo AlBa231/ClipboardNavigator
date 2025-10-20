@@ -1,6 +1,8 @@
-﻿namespace ClipboardNavigator.Lib.Commands;
+﻿using ClipboardNavigator.Lib.Exceptions;
 
-public class CommandException : Exception
+namespace ClipboardNavigator.Lib.Commands;
+
+public class CommandException : AppException
 {
     public CommandException()
     {

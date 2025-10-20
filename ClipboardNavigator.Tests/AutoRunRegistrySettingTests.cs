@@ -30,11 +30,15 @@ public class AutoRunRegistrySettingTests
     [Fact]
     public void TestDeleteRegistryValue()
     {
+        // Arrange
         var regKeyMock = new Mock<IRegistrySetting>();
+        regKeyMock.SetupGet(x => x.RunPath).Returns("D:\\OLD_PATH\appPath.exe");
         var setting = new AutoRunRegistrySetting("D:\\TEMP\\appPath.exe", regKeyMock.Object);
 
+        // Act
         setting.IsAutoStart = false;
 
+        // Assert
         regKeyMock.VerifySet( r => r.RunPath = null);
     }
 

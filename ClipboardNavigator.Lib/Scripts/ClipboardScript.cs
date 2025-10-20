@@ -7,7 +7,7 @@ public abstract class ClipboardScript
     public string Name => GetType().Name;
     public INotificationService? NotificationService { get; set; }
 
-    public async Task Execute(ClipboardDataEventArgs clipboardData)
+    public virtual async Task Execute(ClipboardDataEventArgs clipboardData)
     {
         try
         {
