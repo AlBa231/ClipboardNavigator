@@ -1,4 +1,5 @@
 using ClipboardNavigator.Lib;
+using ClipboardNavigator.Lib.Plugins;
 using ClipboardNavigator.LibWin;
 
 namespace ClipboardNavigator
@@ -7,17 +8,44 @@ namespace ClipboardNavigator
     {
         private readonly IClipboardFacade clipboardFacade;
         private TaskBarPopupForm? popupForm;
+        private bool isFirstShown = true;
 
         private TaskBarPopupForm PopupForm => popupForm ??= new TaskBarPopupForm(clipboardFacade);
 
         public MainForm()
         {
             InitializeComponent();
-            this.clipboardFacade = InitFacade();
-            this.clipboardListBox.ClipboardFacade = this.clipboardFacade;
-            this.clipboardListBox.SelectionChanged += (v) => UpdateTextField();
+            clipboardFacade = InitFacade();
+            clipboardListBox.ClipboardFacade = clipboardFacade;
+            clipboardListBox.SelectionChanged += (v) => UpdateTextField();
             UpdateTextField();
-            if (AppSettings.Instance.AutoHideOnStart) Hide();
+            InitPluginsMenu();
+        }
+
+        protected override void SetVisibleCore(bool value)
+        {
+            if (isFirstShown)
+            {
+                value = !AppSettings.Instance.AutoHideOnStart;
+                isFirstShown = false;
+            }
+            base.SetVisibleCore(value);
+        }
+
+        private void InitPluginsMenu()
+        {
+            var menuItems = Program.PluginManager?.PluginFactory.Plugins.Select(p =>
+                    new ToolStripMenuItem(p.Name, null, pluginMenuItem_Click){Tag = p, Checked = true}).Cast<ToolStripItem>().ToArray();
+            if (menuItems != null)
+                menuPlugins.DropDownItems.AddRange(menuItems);
+        }
+
+        private void pluginMenuItem_Click(object? sender, EventArgs e)
+        {
+            ToolStripMenuItem menuItem = (ToolStripMenuItem?)sender ?? throw new ArgumentNullException(nameof(sender));
+            IPlugin plugin = (IPlugin?)menuItem.Tag ?? throw new ArgumentException("Sender doesn't contain reference to a Plugin", nameof(sender));
+            menuItem.Checked = !menuItem.Checked;
+            plugin.State = menuItem.Checked ? RunState.Running : RunState.Paused;
         }
 
         private ClipboardFacade InitFacade()
@@ -86,6 +114,11 @@ namespace ClipboardNavigator
             if (Visible)
                 Hide();
             else Show();
+        }
+
+        private void mainMenu_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

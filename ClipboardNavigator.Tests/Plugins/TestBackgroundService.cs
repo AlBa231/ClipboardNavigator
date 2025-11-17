@@ -2,19 +2,16 @@
 
 namespace ClipboardNavigator.Tests.Plugins;
 
-internal class TestBackgroundService : IBackgroundService
+internal class TestBackgroundService : BackgroundServiceBase
 {
     public int TaskRunCount { get; set; }
 
-    public Task Run(CancellationToken cancellationToken)
+    protected override Task ExecutePluginCheck(CancellationToken cancellationToken)
     {
-        return Task.Run(async () =>
-        {
-            while (!cancellationToken.IsCancellationRequested)
-            {
-                TaskRunCount++;
-                await Task.Delay(1, cancellationToken);
-            }
-        }, cancellationToken);
+        TaskRunCount++;
+        return Task.CompletedTask;
     }
+
+    protected override int TickTimeoutMs => 1;
+    public override string Name => "Test service";
 }

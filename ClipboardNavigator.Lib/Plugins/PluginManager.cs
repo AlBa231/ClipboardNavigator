@@ -1,8 +1,10 @@
 ﻿namespace ClipboardNavigator.Lib.Plugins;
 public sealed class PluginManager(IPluginFactory pluginFactory)
 {
-    private readonly List<Task> backgroundServiceTasks = new();
+    private readonly List<Task> backgroundServiceTasks = [];
     private readonly CancellationTokenSource cancellationTokenSource = new();
+
+    public IPluginFactory PluginFactory { get; } = pluginFactory;
 
     public void RunPlugins()
     {
@@ -28,7 +30,7 @@ public sealed class PluginManager(IPluginFactory pluginFactory)
 
     private void RunBackgroundServices()
     {
-        foreach (IBackgroundService backgroundService in pluginFactory.Plugins.OfType<IBackgroundService>())
+        foreach (IBackgroundService backgroundService in PluginFactory.Plugins.OfType<IBackgroundService>())
         {
             backgroundServiceTasks.Add(backgroundService.Run(cancellationTokenSource.Token));
         }

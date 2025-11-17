@@ -9,7 +9,7 @@ namespace ClipboardNavigator
 {
     internal static class Program
     {
-        private static PluginManager? pluginManager;
+        public static PluginManager? PluginManager { get; private set; }
 
         /// <summary>
         ///  The main entry point for the application.
@@ -24,14 +24,14 @@ namespace ClipboardNavigator
             InitPlugins();
             Application.ThreadException += Application_ThreadException;
             Application.Run(new MainForm());
-            pluginManager?.StopAllServices().Wait();
+            PluginManager?.StopAllServices().Wait();
         }
 
         private static void InitPlugins()
         {
             IServiceProvider serviceProvider = InitServices();
-            pluginManager = new PluginManager(new PluginFactory(serviceProvider));
-            Task.Run(pluginManager.RunPlugins);
+            PluginManager = new PluginManager(new PluginFactory(serviceProvider));
+            Task.Run(PluginManager.RunPlugins);
         }
 
         private static IServiceProvider InitServices()

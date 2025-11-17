@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             var resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             toolStripMain = new ToolStrip();
+            btnLogin = new ToolStripButton();
             btnSettings = new ToolStripButton();
             mainMenu = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
@@ -50,7 +51,7 @@
             panel1 = new Panel();
             btnHide = new Button();
             btnOk = new Button();
-            btnLogin = new ToolStripButton();
+            menuPlugins = new ToolStripMenuItem();
             toolStripMain.SuspendLayout();
             mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer).BeginInit();
@@ -71,6 +72,15 @@
             toolStripMain.Size = new Size(755, 55);
             toolStripMain.TabIndex = 2;
             // 
+            // btnLogin
+            // 
+            btnLogin.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            btnLogin.Image = (Image)resources.GetObject("btnLogin.Image");
+            btnLogin.ImageTransparentColor = Color.Magenta;
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(52, 52);
+            btnLogin.Text = "Login with Google";
+            // 
             // btnSettings
             // 
             btnSettings.DisplayStyle = ToolStripItemDisplayStyle.Image;
@@ -90,6 +100,7 @@
             mainMenu.Size = new Size(755, 28);
             mainMenu.TabIndex = 3;
             mainMenu.Text = "mainMenu";
+            mainMenu.ItemClicked += mainMenu_ItemClicked;
             // 
             // fileToolStripMenuItem
             // 
@@ -178,9 +189,9 @@
             // contextMenuNotifyIcon
             // 
             contextMenuNotifyIcon.ImageScalingSize = new Size(20, 20);
-            contextMenuNotifyIcon.Items.AddRange(new ToolStripItem[] { hideShowToolStripMenuItem, showHideMainWindowToolStripMenuItem, settingsToolStripMenuItem, exitToolStripMenuItem1 });
+            contextMenuNotifyIcon.Items.AddRange(new ToolStripItem[] { hideShowToolStripMenuItem, showHideMainWindowToolStripMenuItem, menuPlugins, settingsToolStripMenuItem, exitToolStripMenuItem1 });
             contextMenuNotifyIcon.Name = "contextMenuStrip2";
-            contextMenuNotifyIcon.Size = new Size(246, 100);
+            contextMenuNotifyIcon.Size = new Size(246, 152);
             // 
             // hideShowToolStripMenuItem
             // 
@@ -241,14 +252,11 @@
             btnOk.Text = "OK";
             btnOk.UseVisualStyleBackColor = true;
             // 
-            // btnLogin
+            // menuPlugins
             // 
-            btnLogin.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnLogin.Image = (Image)resources.GetObject("btnLogin.Image");
-            btnLogin.ImageTransparentColor = Color.Magenta;
-            btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(52, 52);
-            btnLogin.Text = "Login with Google";
+            menuPlugins.Name = "menuPlugins";
+            menuPlugins.Size = new Size(245, 24);
+            menuPlugins.Text = "Plugins";
             // 
             // MainForm
             // 
@@ -309,5 +317,6 @@
         private ClipboardListBox clipboardListBox;
         private ToolStripMenuItem showHideMainWindowToolStripMenuItem;
         private ToolStripButton btnLogin;
+        private ToolStripMenuItem menuPlugins;
     }
 }

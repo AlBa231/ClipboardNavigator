@@ -1,16 +1,19 @@
-﻿using ClipboardNavigator.Lib.Plugins;
-
-namespace ClipboardNavigator.LibWin.Plugins;
+﻿
+namespace ClipboardNavigator.Lib.Plugins;
 public abstract class BackgroundServiceBase: IBackgroundService
 {
-    protected abstract int TickTimeoutSeconds { get; }
+    protected abstract int TickTimeoutMs { get; }
+    public abstract string Name { get; }
+
+    public RunState State { get; set; } = RunState.Running;
 
     public async Task Run(CancellationToken cancellationToken)
     {
         while (!cancellationToken.IsCancellationRequested)
         {
-            await ExecutePluginCheck(cancellationToken);
-            await Task.Delay(TimeSpan.FromSeconds(TickTimeoutSeconds), cancellationToken);
+            if (State == RunState.Running)
+                await ExecutePluginCheck(cancellationToken);
+            await Task.Delay(TimeSpan.FromMilliseconds(TickTimeoutMs), cancellationToken);
         }
     }
 
