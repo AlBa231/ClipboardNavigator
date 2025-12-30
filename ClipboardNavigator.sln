@@ -18,6 +18,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{80D06B5D-6E8F-4E2F-8D5F-32B2FD6ADC27}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-desktop.yml = .github\workflows\dotnet-desktop.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +52,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{80D06B5D-6E8F-4E2F-8D5F-32B2FD6ADC27} = {CC0B6B0C-7A94-4F68-95DF-0B47917294F3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E74801F5-127A-4905-B9DD-2023DAA0CD18}
