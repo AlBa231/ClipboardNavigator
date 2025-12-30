@@ -17,6 +17,7 @@ namespace ClipboardNavigator
 
         public event ClipboardSelectedItem SelectionChanged;
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public IClipboardFacade ClipboardFacade
         {
             get => clipboardFacade;
@@ -27,6 +28,7 @@ namespace ClipboardNavigator
             }
         }
 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ClipboardData? SelectedItem
         {
             get => lbClipboardHistory.SelectedItem as ClipboardData;
