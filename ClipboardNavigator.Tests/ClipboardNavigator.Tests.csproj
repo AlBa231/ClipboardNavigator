@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ClipboardNavigator.LibWin\ClipboardNavigator.LibWin.csproj" />
     <ProjectReference Include="..\ClipboardNavigator.Lib\ClipboardNavigator.Lib.csproj" />
   </ItemGroup>
 

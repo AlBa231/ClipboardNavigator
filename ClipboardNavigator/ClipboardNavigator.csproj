@@ -32,4 +32,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="taskkill /f /fi &quot;imagename eq $(TargetFileName)&quot;" />
+  </Target>
+
 </Project>
