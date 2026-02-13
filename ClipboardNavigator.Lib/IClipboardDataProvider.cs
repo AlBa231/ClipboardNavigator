@@ -1,11 +1,10 @@
-﻿namespace ClipboardNavigator.Lib
-{
-    public interface IClipboardDataProvider
-    {
-        public ClipboardData GetCurrentValue();
-        public void SetCurrentValue(ClipboardData value);
-        public event ClipboardDataChanged Changed;
-    }
+﻿namespace ClipboardNavigator.Lib;
 
-    public delegate void ClipboardDataChanged(ClipboardData data);
+public interface IClipboardDataProvider
+{
+    public ClipboardData GetCurrentValue();
+    public void SetCurrentValue(ClipboardData value);
+    public event ClipboardDataChanged Changed;
 }
+
+public delegate void ClipboardDataChanged(ClipboardData data);

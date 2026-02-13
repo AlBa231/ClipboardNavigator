@@ -2,38 +2,37 @@
 using ClipboardNavigator.Lib;
 using WK.Libraries.SharpClipboardNS;
 
-namespace ClipboardNavigator.LibWin
+namespace ClipboardNavigator.LibWin;
+
+public class WindowsClipboardDataProvider : IClipboardDataProvider
 {
-    public class WindowsClipboardDataProvider : IClipboardDataProvider
+    private readonly SharpClipboard clipboard = new();
+
+    public event ClipboardDataChanged? Changed;
+
+    public WindowsClipboardDataProvider()
     {
-        private readonly SharpClipboard clipboard = new();
+        clipboard.ClipboardChanged += Clipboard_ClipboardChanged;
+    }
 
-        public event ClipboardDataChanged? Changed;
+    private void Clipboard_ClipboardChanged(object? sender, SharpClipboard.ClipboardChangedEventArgs e)
+    {
+        if (e.ContentType == SharpClipboard.ContentTypes.Text)
+            NotifyNewTextCopied((string)e.Content);
+    }
 
-        public WindowsClipboardDataProvider()
-        {
-            clipboard.ClipboardChanged += Clipboard_ClipboardChanged;
-        }
+    private void NotifyNewTextCopied(string text)
+    {
+        Changed?.Invoke(new ClipboardData(text));
+    }
 
-        private void Clipboard_ClipboardChanged(object? sender, SharpClipboard.ClipboardChangedEventArgs e)
-        {
-            if (e.ContentType == SharpClipboard.ContentTypes.Text)
-                NotifyNewTextCopied((string)e.Content);
-        }
+    public ClipboardData GetCurrentValue()
+    {
+        return new ClipboardData(this.clipboard.ClipboardText);
+    }
 
-        private void NotifyNewTextCopied(string text)
-        {
-            Changed?.Invoke(new ClipboardData(text));
-        }
-
-        public ClipboardData GetCurrentValue()
-        {
-            return new ClipboardData(this.clipboard.ClipboardText);
-        }
-
-        public void SetCurrentValue(ClipboardData value)
-        {
-            Clipboard.SetText(value.Text);
-        }
+    public void SetCurrentValue(ClipboardData value)
+    {
+        Clipboard.SetText(value.Text);
     }
 }
