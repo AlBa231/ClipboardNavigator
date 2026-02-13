@@ -1,16 +1,13 @@
-using ClipboardNavigator.Lib.Extensions;
+using ClipboardNavigator.Code.Extensions;
 using ClipboardNavigator.Lib.Plugins;
-using ClipboardNavigator.Lib.Plugins.BackgroundServices;
-using ClipboardNavigator.LibWin.Plugins.BackgroundServices;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Serilog;
 
 namespace ClipboardNavigator
 {
     internal static class Program
     {
-        public static PluginManager? PluginManager { get; private set; }
-
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -21,30 +18,21 @@ namespace ClipboardNavigator
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             InitLog();
-            InitPlugins();
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureServices((_, services) => ConfigureServices(services))
+                .Build();
             Application.ThreadException += Application_ThreadException;
-            Application.Run(new MainForm());
-            PluginManager?.StopAllServices().Wait();
+            host.Services.GetRequiredService<IPluginManager>().RunPlugins();
+            Application.Run(host.Services.GetRequiredService<MainForm>());
+            host.Services.GetRequiredService<IPluginManager>().StopAllServices().Wait();
         }
 
-        private static void InitPlugins()
+        private static IServiceCollection ConfigureServices(IServiceCollection services)
         {
-            IServiceProvider serviceProvider = InitServices();
-            PluginManager = new PluginManager(new PluginFactory(serviceProvider));
-            Task.Run(PluginManager.RunPlugins);
-        }
-
-        private static IServiceProvider InitServices()
-        {
-            var serviceCollection = new ServiceCollection();
-
-            serviceCollection.AddSingleton<IIdleTimeService, IdleTimeServiceWindows>();
-            foreach (Type type in typeof(IPlugin).Assembly.GetTypesOf<IPlugin>())
-            {
-                serviceCollection.AddTransient(type);
-            }
-
-            return serviceCollection.BuildServiceProvider();
+            return services
+                .AddAppServices()
+                .AddPlugins()
+                .AddForms();
         }
 
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)

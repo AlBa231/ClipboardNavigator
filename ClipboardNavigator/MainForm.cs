@@ -1,19 +1,22 @@
 using ClipboardNavigator.Lib;
 using ClipboardNavigator.Lib.Plugins;
+using ClipboardNavigator.Lib.Plugins.Interfaces;
 using ClipboardNavigator.LibWin;
 
 namespace ClipboardNavigator
 {
     public partial class MainForm : Form
     {
+        private readonly IPluginFactory _pluginFactory;
         private readonly IClipboardFacade clipboardFacade;
         private TaskBarPopupForm? popupForm;
         private bool isFirstShown = true;
 
         private TaskBarPopupForm PopupForm => popupForm ??= new TaskBarPopupForm(clipboardFacade);
 
-        public MainForm()
+        public MainForm(IPluginFactory pluginFactory)
         {
+            _pluginFactory = pluginFactory;
             InitializeComponent();
             clipboardFacade = InitFacade();
             clipboardListBox.ClipboardFacade = clipboardFacade;
@@ -34,10 +37,9 @@ namespace ClipboardNavigator
 
         private void InitPluginsMenu()
         {
-            var menuItems = Program.PluginManager?.PluginFactory.Plugins.Select(p =>
+            var menuItems = _pluginFactory.Plugins.Select(p =>
                     new ToolStripMenuItem(p.Name, null, pluginMenuItem_Click){Tag = p, Checked = true}).Cast<ToolStripItem>().ToArray();
-            if (menuItems != null)
-                menuPlugins.DropDownItems.AddRange(menuItems);
+            menuPlugins.DropDownItems.AddRange(menuItems);
         }
 
         private void pluginMenuItem_Click(object? sender, EventArgs e)

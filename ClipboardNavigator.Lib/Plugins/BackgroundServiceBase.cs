@@ -1,4 +1,6 @@
 ﻿
+using ClipboardNavigator.Lib.Plugins.Interfaces;
+
 namespace ClipboardNavigator.Lib.Plugins;
 public abstract class BackgroundServiceBase: IBackgroundService
 {

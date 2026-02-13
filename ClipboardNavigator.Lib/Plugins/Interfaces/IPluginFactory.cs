@@ -1,4 +1,4 @@
-﻿namespace ClipboardNavigator.Lib.Plugins;
+﻿namespace ClipboardNavigator.Lib.Plugins.Interfaces;
 
 public interface IPluginFactory
 {

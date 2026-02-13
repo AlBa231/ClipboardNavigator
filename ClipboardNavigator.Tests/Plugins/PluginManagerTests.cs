@@ -1,4 +1,5 @@
 ﻿using ClipboardNavigator.Lib.Plugins;
+using ClipboardNavigator.Lib.Plugins.Interfaces;
 
 namespace ClipboardNavigator.Tests.Plugins;
 public class PluginManagerTests

@@ -1,5 +1,8 @@
-﻿namespace ClipboardNavigator.Lib.Plugins;
-public sealed class PluginManager(IPluginFactory pluginFactory)
+﻿using ClipboardNavigator.Lib.Plugins.Interfaces;
+
+namespace ClipboardNavigator.Lib.Plugins;
+
+public sealed class PluginManager(IPluginFactory pluginFactory) : IPluginManager
 {
     private readonly List<Task> backgroundServiceTasks = [];
     private readonly CancellationTokenSource cancellationTokenSource = new();

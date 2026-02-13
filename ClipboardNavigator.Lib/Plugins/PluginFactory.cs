@@ -1,5 +1,6 @@
 ﻿using ClipboardNavigator.Lib.Exceptions;
 using ClipboardNavigator.Lib.Extensions;
+using ClipboardNavigator.Lib.Plugins.Interfaces;
 
 namespace ClipboardNavigator.Lib.Plugins;
 
