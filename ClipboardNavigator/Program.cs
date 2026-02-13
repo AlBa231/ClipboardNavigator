@@ -1,5 +1,5 @@
+using ClipboardNavigator.Code;
 using ClipboardNavigator.Code.Extensions;
-using ClipboardNavigator.Lib.Plugins;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -14,17 +14,14 @@ namespace ClipboardNavigator
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            InitLog();
-            var host = Host.CreateDefaultBuilder()
+            using IHost host = Host.CreateDefaultBuilder()
+                .UseSerilog()
                 .ConfigureServices((_, services) => ConfigureServices(services))
                 .Build();
             Application.ThreadException += Application_ThreadException;
-            host.Services.GetRequiredService<IPluginManager>().RunPlugins();
+            host.Services.GetRequiredService<AppInitializer>().Initialize();
             Application.Run(host.Services.GetRequiredService<MainForm>());
-            host.Services.GetRequiredService<IPluginManager>().StopAllServices().Wait();
         }
 
         private static IServiceCollection ConfigureServices(IServiceCollection services)
@@ -38,13 +35,6 @@ namespace ClipboardNavigator
         private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
         {
             Log.Error(e.Exception, "Thread exception");
-        }
-
-        private static void InitLog()
-        {
-            new LoggerConfiguration()
-                .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
-                .CreateLogger();
         }
     }
 }

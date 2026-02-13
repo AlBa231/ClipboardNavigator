@@ -1,6 +1,6 @@
 ﻿namespace ClipboardNavigator.Lib.Commands;
 
-public class ClipboardCommandFactory
+public class ClipboardCommandFactory : IClipboardCommandFactory
 {
     private readonly Dictionary<IHotKey, IClipboardCommand> commands = new();
 

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.ComponentModel;
 using ClipboardNavigator.Lib.Plugins.Interfaces;
 using ClipboardNavigator.Lib.Windows;
 
@@ -12,12 +6,10 @@ namespace ClipboardNavigator.Plugins;
 
 public partial class PluginRowControl : UserControl
 {
-    private IPluginFactory _pluginFactory;
-    private IWindowService _windowService;
+    private readonly IWindowService _windowService;
 
-    public PluginRowControl(IPluginFactory pluginFactory, IWindowService windowService)
+    public PluginRowControl(IWindowService windowService)
     {
-        _pluginFactory = pluginFactory;
         _windowService = windowService;
         InitializeComponent();
     }

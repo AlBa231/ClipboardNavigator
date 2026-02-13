@@ -3,11 +3,12 @@ using ClipboardNavigator.LibWin.Windows.Forms;
 
 namespace ClipboardNavigator.LibWin.Windows;
 
-public class WindowService : IWindowService
+public class WindowService(Func<SettingsForm> formFactory) : IWindowService
 {
     public bool ShowSettingsDialog<T>(T settingsObject)
     {
-        var dialog = new SettingsForm { SettingsObject = settingsObject };
+        var dialog = formFactory();
+        dialog.SettingsObject = settingsObject;
         return dialog.ShowDialog() == DialogResult.OK;
     }
 }

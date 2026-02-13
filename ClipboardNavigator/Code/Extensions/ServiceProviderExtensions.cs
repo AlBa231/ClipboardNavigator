@@ -1,12 +1,13 @@
 ﻿using System.Reflection;
-using ClipboardNavigator.Lib.Plugins.BackgroundServices;
-using ClipboardNavigator.Lib.Plugins.Interfaces;
-using ClipboardNavigator.LibWin.Plugins.BackgroundServices;
-using Microsoft.Extensions.DependencyInjection;
+using ClipboardNavigator.Lib.Commands;
 using ClipboardNavigator.Lib.Extensions;
 using ClipboardNavigator.Lib.Plugins;
+using ClipboardNavigator.Lib.Plugins.BackgroundServices;
+using ClipboardNavigator.Lib.Plugins.Interfaces;
 using ClipboardNavigator.Lib.Windows;
+using ClipboardNavigator.LibWin.Plugins.BackgroundServices;
 using ClipboardNavigator.LibWin.Windows;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ClipboardNavigator.Code.Extensions;
 
@@ -19,7 +20,9 @@ internal static class ServiceProviderExtensions
             services.AddSingleton<IIdleTimeService, IdleTimeServiceWindows>();
             services.AddSingleton<IPluginFactory, PluginFactory>();
             services.AddSingleton<IPluginManager, PluginManager>();
+            services.AddSingleton<IClipboardCommandFactory, ClipboardCommandFactory>();
             services.AddSingleton<IWindowService, WindowService>();
+            services.AddSingleton<AppInitializer>();
             return services;
         }
 
