@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using ClipboardNavigator.Lib;
+﻿using ClipboardNavigator.Lib;
 using WK.Libraries.SharpClipboardNS;
 
 namespace ClipboardNavigator.LibWin;

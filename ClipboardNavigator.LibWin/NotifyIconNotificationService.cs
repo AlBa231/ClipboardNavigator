@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-using ClipboardNavigator.Lib.Notification;
+﻿using ClipboardNavigator.Lib.Notification;
 
 namespace ClipboardNavigator.LibWin;
 public class NotifyIconNotificationService(NotifyIcon notifyIcon) : INotificationService

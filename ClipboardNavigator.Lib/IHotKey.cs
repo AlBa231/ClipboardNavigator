@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace ClipboardNavigator.Lib;
+﻿namespace ClipboardNavigator.Lib;
 
 public interface IHotKey: IEquatable<IHotKey>
 {

@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
-using System.Drawing;
 using System.Runtime.InteropServices;
-using System.Windows.Forms;
 using ClipboardNavigator.Lib.Exceptions;
 using ClipboardNavigator.Lib.Plugins.BackgroundServices;
 

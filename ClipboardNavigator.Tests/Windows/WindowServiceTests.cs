@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ClipboardNavigator.LibWin.Windows;
-
-namespace ClipboardNavigator.Tests.Windows;
+﻿namespace ClipboardNavigator.Tests.Windows;
 
 public class WindowServiceTests
 {

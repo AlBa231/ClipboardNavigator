@@ -1,6 +1,5 @@
 ﻿using ClipboardNavigator.Lib.Commands;
 using ClipboardNavigator.Tests.LibTestImplementation;
-using Moq;
 
 namespace ClipboardNavigator.Tests;
 
