@@ -1,6 +1,6 @@
-﻿namespace ClipboardNavigator.LibWin.Windows.Forms;
+﻿namespace ClipboardNavigator.Code.Windows.Forms;
 
-partial class SettingsForm
+partial class PluginSettingsForm
 {
     /// <summary>
     /// Required designer variable.
@@ -71,7 +71,7 @@ partial class SettingsForm
         ClientSize = new Size(504, 567);
         Controls.Add(propertyGrid);
         Controls.Add(panelButtons);
-        Name = "SettingsForm";
+        Name = "PluginSettingsForm";
         Text = "SettingsForm";
         panelButtons.ResumeLayout(false);
         ResumeLayout(false);

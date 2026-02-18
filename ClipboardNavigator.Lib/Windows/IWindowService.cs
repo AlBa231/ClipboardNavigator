@@ -3,4 +3,5 @@
 public interface IWindowService
 {
     bool ShowSettingsDialog<T>(T settingsObject);
+    bool ShowPluginsDialog();
 }

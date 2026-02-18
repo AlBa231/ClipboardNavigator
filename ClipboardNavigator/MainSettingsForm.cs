@@ -3,10 +3,10 @@ using ClipboardNavigator.LibWin;
 
 namespace ClipboardNavigator;
 
-public partial class SettingsForm : Form
+public partial class MainSettingsForm : Form
 {
     private readonly AutoRunRegistrySetting autoRunRegistry = new(Application.ExecutablePath, new WindowsRunRegistrySetting());
-    public SettingsForm()
+    public MainSettingsForm()
     {
         InitializeComponent();
         TryInitFields();

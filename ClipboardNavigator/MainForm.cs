@@ -1,36 +1,61 @@
+using ClipboardNavigator.Code;
 using ClipboardNavigator.Lib;
+using ClipboardNavigator.Lib.Commands;
 using ClipboardNavigator.Lib.Plugins;
 using ClipboardNavigator.Lib.Plugins.Interfaces;
+using ClipboardNavigator.Lib.Windows;
 using ClipboardNavigator.LibWin;
+using ClipboardNavigator.LibWin.Win32;
 
 namespace ClipboardNavigator;
 
-public partial class MainForm : Form
+public partial class MainForm : Form, IMainForm
 {
     private readonly IPluginFactory _pluginFactory;
-    private readonly IClipboardFacade clipboardFacade;
-    private TaskBarPopupForm? popupForm;
-    private bool isFirstShown = true;
+    private readonly IHotkeyManager _hotkeyManager;
+    private readonly IClipboardCommandFactory _commandFactory;
+    private readonly IClipboardFacade _clipboardFacade;
+    private TaskBarPopupForm? _popupForm;
+    private bool _isFirstShown = true;
 
-    private TaskBarPopupForm PopupForm => popupForm ??= new TaskBarPopupForm(clipboardFacade);
+    private TaskBarPopupForm PopupForm => _popupForm ??= new TaskBarPopupForm(_clipboardFacade);
 
-    public MainForm(IPluginFactory pluginFactory)
+    public MainForm(IPluginFactory pluginFactory, IHotkeyManager hotkeyManager, IClipboardCommandFactory commandFactory, AppInitializer appInitializer)
     {
         _pluginFactory = pluginFactory;
+        _hotkeyManager = hotkeyManager;
+        _commandFactory = commandFactory;
         InitializeComponent();
-        clipboardFacade = InitFacade();
-        clipboardListBox.ClipboardFacade = clipboardFacade;
-        clipboardListBox.SelectionChanged += (v) => UpdateTextField();
+        hotkeyManager.MainFormHandler = Handle;
+        appInitializer.Initialize();
+        _clipboardFacade = InitFacade();
+        InitUi();
+    }
+
+    private void InitUi()
+    {
+        clipboardListBox.ClipboardFacade = _clipboardFacade;
+        clipboardListBox.SelectionChanged += _ => UpdateTextField();
         UpdateTextField();
         InitPluginsMenu();
     }
 
+    protected override void WndProc(ref Message m)
+    {
+        if (m.Msg == Win32Constants.WM_HOTKEY)
+        {
+            IHotKey? command = _hotkeyManager.FindHotkeyById(m.WParam.ToInt32());
+            _commandFactory.ExecuteCommand(command);
+        }
+        base.WndProc(ref m);
+    }
+
     protected override void SetVisibleCore(bool value)
     {
-        if (isFirstShown)
+        if (_isFirstShown)
         {
             value = !AppSettings.Instance.AutoHideOnStart;
-            isFirstShown = false;
+            _isFirstShown = false;
         }
         base.SetVisibleCore(value);
     }
@@ -74,7 +99,7 @@ public partial class MainForm : Form
 
     private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        var settingsForm = new SettingsForm();
+        var settingsForm = new MainSettingsForm();
         settingsForm.ShowDialog();
     }
 
@@ -88,8 +113,8 @@ public partial class MainForm : Form
 
     private void UpdateTextField()
     {
-        textBoxCurrentClipboard.Text = clipboardFacade.CurrentValue.Text;
-        clipboardListBox.SelectedItem = clipboardFacade.CurrentValue;
+        textBoxCurrentClipboard.Text = _clipboardFacade.CurrentValue.Text;
+        clipboardListBox.SelectedItem = _clipboardFacade.CurrentValue;
     }
 
     private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)

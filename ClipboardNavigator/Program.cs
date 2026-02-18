@@ -20,16 +20,15 @@ internal static class Program
             .ConfigureServices((_, services) => ConfigureServices(services))
             .Build();
         Application.ThreadException += Application_ThreadException;
-        host.Services.GetRequiredService<AppInitializer>().Initialize();
         Application.Run(host.Services.GetRequiredService<MainForm>());
     }
 
-    private static IServiceCollection ConfigureServices(IServiceCollection services)
+    private static void ConfigureServices(IServiceCollection services)
     {
-        return services
+        services
+            .AddControls()
             .AddAppServices()
-            .AddPlugins()
-            .AddForms();
+            .AddPlugins();
     }
 
     private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)

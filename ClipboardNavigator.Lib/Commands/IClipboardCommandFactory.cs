@@ -4,4 +4,5 @@ public interface IClipboardCommandFactory
 {
     IClipboardCommand? FindCommand(IHotKey hotKey);
     void RegisterCommand(IHotKey hotKey, IClipboardCommand command);
+    IClipboardCommand? ExecuteCommand(IHotKey? hotKey);
 }

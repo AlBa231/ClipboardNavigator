@@ -1,12 +1,14 @@
 ﻿using System.Reflection;
+using ClipboardNavigator.Code.Windows;
+using ClipboardNavigator.Code.Windows.Forms.Plugins;
 using ClipboardNavigator.Lib.Commands;
 using ClipboardNavigator.Lib.Extensions;
 using ClipboardNavigator.Lib.Plugins;
 using ClipboardNavigator.Lib.Plugins.BackgroundServices;
 using ClipboardNavigator.Lib.Plugins.Interfaces;
 using ClipboardNavigator.Lib.Windows;
+using ClipboardNavigator.LibWin.Commands;
 using ClipboardNavigator.LibWin.Plugins.BackgroundServices;
-using ClipboardNavigator.LibWin.Windows;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ClipboardNavigator.Code.Extensions;
@@ -20,18 +22,20 @@ internal static class ServiceProviderExtensions
             services.AddSingleton<IIdleTimeService, IdleTimeServiceWindows>();
             services.AddSingleton<IPluginFactory, PluginFactory>();
             services.AddSingleton<IPluginManager, PluginManager>();
+            services.AddSingleton<IHotkeyManager, HotkeyManager>();
             services.AddSingleton<IClipboardCommandFactory, ClipboardCommandFactory>();
             services.AddSingleton<IWindowService, WindowService>();
             services.AddSingleton<AppInitializer>();
             return services;
         }
 
-        public IServiceCollection AddForms()
+        public IServiceCollection AddControls()
         {
-            foreach (Type type in GetAssemblyWithForms().SelectMany(a=>a.GetTypesOf<Form>()))
+            foreach (Type type in GetAssemblyWithUiComponents().SelectMany(a=>a.GetTypesOf<Control>()))
             {
                 services.AddTransient(type);
             }
+            services.AddFactory<PluginRowControl>();
             return services;
         }
 
@@ -45,7 +49,7 @@ internal static class ServiceProviderExtensions
         }
     }
 
-    private static IEnumerable<Assembly> GetAssemblyWithForms() =>
+    private static IEnumerable<Assembly> GetAssemblyWithUiComponents() =>
     [
         Assembly.GetAssembly(typeof(MainForm))!,
         Assembly.GetAssembly(typeof(WindowService))!

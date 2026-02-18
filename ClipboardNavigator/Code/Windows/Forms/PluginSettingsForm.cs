@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel;
 
-namespace ClipboardNavigator.LibWin.Windows.Forms;
+namespace ClipboardNavigator.Code.Windows.Forms;
 
-public partial class SettingsForm : Form
+public partial class PluginSettingsForm : Form
 {
-    public SettingsForm()
+    public PluginSettingsForm()
     {
         InitializeComponent();
     }

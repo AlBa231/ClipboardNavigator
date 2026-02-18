@@ -1,6 +1,6 @@
 ﻿namespace ClipboardNavigator
 {
-    partial class SettingsForm
+    partial class MainSettingsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -62,7 +62,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(cbAutoHide);
             Controls.Add(cbAutoStart);
-            Name = "SettingsForm";
+            Name = "MainSettingsForm";
             Text = "SettingsForm";
             ResumeLayout(false);
             PerformLayout();

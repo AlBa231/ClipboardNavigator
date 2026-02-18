@@ -8,6 +8,8 @@ internal class TestHotKey : IHotKey
     }
 
     public string Name { get; }
+    public HotkeyModifiers Modifiers { get; set; }
+    public int Key { get; set; }
 
     public bool Equals(IHotKey? other)
     {

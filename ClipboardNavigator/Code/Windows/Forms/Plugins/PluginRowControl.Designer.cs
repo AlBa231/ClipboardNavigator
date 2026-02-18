@@ -1,4 +1,4 @@
-﻿namespace ClipboardNavigator.Plugins;
+﻿namespace ClipboardNavigator.Code.Windows.Forms.Plugins;
 
 partial class PluginRowControl
 {

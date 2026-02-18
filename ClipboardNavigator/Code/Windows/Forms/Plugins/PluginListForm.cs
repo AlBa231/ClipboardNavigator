@@ -1,6 +1,6 @@
 ﻿using ClipboardNavigator.Lib.Plugins.Interfaces;
 
-namespace ClipboardNavigator.Plugins;
+namespace ClipboardNavigator.Code.Windows.Forms.Plugins;
 
 public partial class PluginListForm : Form
 {
