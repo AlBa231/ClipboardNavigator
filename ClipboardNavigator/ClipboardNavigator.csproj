@@ -47,7 +47,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="taskkill /f /fi &quot;imagename eq $(TargetFileName)&quot;" />
+    <Exec Command="taskkill /f /fi &quot;imagename eq ClipboardNavigator.exe&quot;" />
   </Target>
 
 </Project>
