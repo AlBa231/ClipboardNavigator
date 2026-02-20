@@ -10,7 +10,7 @@ public partial class PluginSettingsForm : Form
     }
 
     [DefaultValue(null)]
-    internal object? SettingsObject
+    public object? SettingsObject
     {
         get => propertyGrid.SelectedObject;
         set => propertyGrid.SelectedObject = value;
