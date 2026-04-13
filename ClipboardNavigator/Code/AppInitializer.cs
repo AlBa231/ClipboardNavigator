@@ -1,5 +1,6 @@
 ﻿using ClipboardNavigator.Lib;
 using ClipboardNavigator.Lib.Commands;
+using ClipboardNavigator.Lib.Notification;
 using ClipboardNavigator.Lib.Plugins;
 using ClipboardNavigator.Lib.Windows;
 using ClipboardNavigator.LibWin.Commands.Impl;
@@ -12,17 +13,20 @@ public sealed class AppInitializer(
     IClipboardFacade clipboardFacade,
     IPluginManager pluginManager,
     IClipboardCommandFactory commandFactory,
-    IMainForm mainForm,
+    IHotkeyManager hotkeyManager,
+    INotificationService notificationService,
     IWindowService windowService) : IDisposable
 {
-    public void Initialize()
+    public void Initialize(IMainForm mainForm)
     {
         InitLog();
+        hotkeyManager.MainFormHandler = mainForm.Handle;
         pluginManager.StartPlugins();
         RegisterAllCommands();
         clipboardDataProvider.Changed += clipboardFacade.ProcessNewClipboardData;
         clipboardFacade.ProcessNewClipboardData(clipboardDataProvider.GetCurrentValue());
-        InitMainForm();
+        notificationService.MainForm = mainForm;
+        InitMainForm(mainForm);
     }
 
     private void RegisterAllCommands()
@@ -40,7 +44,7 @@ public sealed class AppInitializer(
             .CreateLogger();
     }
 
-    private void InitMainForm()
+    private void InitMainForm(IMainForm mainForm)
     {
         mainForm.InitPluginsMenu(pluginManager.PluginFactory.Plugins);
         mainForm.MainListBox.DataProvider = clipboardDataProvider;

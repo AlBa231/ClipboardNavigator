@@ -10,22 +10,22 @@ namespace ClipboardNavigator;
 public partial class MainForm : Form, IMainForm
 {
     private readonly IClipboardFacade _clipboardFacade;
+    private readonly IWindowService _windowService;
     private bool _isFirstShown = true;
-
-    private TaskBarPopupForm PopupForm => field ??= new TaskBarPopupForm(_clipboardFacade);
 
     public IClipboardListBox MainListBox => clipboardListBox;
 
-    public MainForm(IClipboardFacade clipboardFacade, AppInitializer appInitializer)
+    public MainForm(IClipboardFacade clipboardFacade, IWindowService windowService, AppInitializer appInitializer)
     {
         _clipboardFacade = clipboardFacade;
+        _windowService = windowService;
         InitializeComponent();
-        appInitializer.Initialize();
+        appInitializer.Initialize(this);
     }
 
     public Task ShowNotification(string title, string message, NotificationType type)
     {
-        notifyIcon.ShowBalloonTip(2000, title, message, ToolTipIcon.Info);
+        notifyIcon.ShowBalloonTip(2000, title, message, ToolTipIcon.None);
         return Task.CompletedTask;
     }
 
@@ -97,7 +97,7 @@ public partial class MainForm : Form, IMainForm
 
     private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)
     {
-        PopupForm.ToggleVisibility();
+        _windowService.TogglePopupForm();
     }
 
     private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)

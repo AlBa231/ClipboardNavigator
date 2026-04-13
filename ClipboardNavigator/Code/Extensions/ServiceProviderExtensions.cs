@@ -4,6 +4,7 @@ using ClipboardNavigator.Code.Windows.Forms.Plugins;
 using ClipboardNavigator.Lib;
 using ClipboardNavigator.Lib.Commands;
 using ClipboardNavigator.Lib.Extensions;
+using ClipboardNavigator.Lib.IO;
 using ClipboardNavigator.Lib.Notification;
 using ClipboardNavigator.Lib.Plugins;
 using ClipboardNavigator.Lib.Plugins.BackgroundServices;
@@ -30,11 +31,12 @@ internal static class ServiceProviderExtensions
             services.AddSingleton<IHotkeyManager, HotkeyManager>();
             services.AddSingleton<IClipboardCommandFactory, ClipboardCommandFactory>();
             services.AddSingleton<IWindowService, WindowService>();
+            services.AddSingleton<INotificationService, NotifyIconNotificationService>();
             services.AddSingleton<AppInitializer>();
-
-            services.AddTransient<INotificationService, NotifyIconNotificationService>();
+            
             services.AddTransient<IClipboardDataProvider, WindowsClipboardDataProvider>();
             services.AddTransient<IClipboardFacade, ClipboardFacade>();
+            services.AddTransient<IFileService, FileService>();
 
             return services;
         }
@@ -45,6 +47,7 @@ internal static class ServiceProviderExtensions
             {
                 services.AddTransient(type);
             }
+            services.AddTransient<IMainForm, MainForm>();
             services.AddFactory<PluginRowControl>();
             return services;
         }
@@ -62,7 +65,7 @@ internal static class ServiceProviderExtensions
         {
             foreach (Type type in typeof(IClipboardScript).Assembly.GetTypesOf<IClipboardScript>())
             {
-                services.AddSingleton(type);
+                services.AddTransient(typeof(IClipboardScript), type);
             }
             return services;
         }

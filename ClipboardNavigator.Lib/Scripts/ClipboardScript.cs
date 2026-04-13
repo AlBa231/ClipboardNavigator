@@ -1,8 +1,6 @@
-﻿using ClipboardNavigator.Lib.Notification;
+﻿namespace ClipboardNavigator.Lib.Scripts;
 
-namespace ClipboardNavigator.Lib.Scripts;
-
-public abstract class ClipboardScript(INotificationService notificationService) : IClipboardScript
+public abstract class ClipboardScript : IClipboardScript
 {
     public string Name => GetType().Name;
 

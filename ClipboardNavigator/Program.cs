@@ -1,5 +1,5 @@
-using ClipboardNavigator.Code;
 using ClipboardNavigator.Code.Extensions;
+using ClipboardNavigator.Lib.Windows;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
@@ -20,7 +20,7 @@ internal static class Program
             .ConfigureServices((_, services) => ConfigureServices(services))
             .Build();
         Application.ThreadException += Application_ThreadException;
-        Application.Run(host.Services.GetRequiredService<MainForm>());
+        Application.Run((Form)host.Services.GetRequiredService<IMainForm>());
     }
 
     private static void ConfigureServices(IServiceCollection services)

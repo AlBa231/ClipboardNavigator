@@ -1,8 +1,9 @@
 ﻿using System.Text.RegularExpressions;
+using ClipboardNavigator.Lib.IO;
 using ClipboardNavigator.Lib.Notification;
 
 namespace ClipboardNavigator.Lib.Scripts;
-public class UpdateAwsCredentialsScript(INotificationService notificationService):ClipboardScript(notificationService)
+public class UpdateAwsCredentialsScript(INotificationService notificationService, IFileService fileService):ClipboardScript
 {
     private static readonly Regex AwsCredentialsRegex = new(@"(?<AWS_Credentials>aws_access_key_id\s*=\s*(\S+)\s*[\r\n]+aws_secret_access_key\s*=\s*(\S+)\s*[\r\n]+aws_session_token\s*=\s*(\S+)\s*)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
@@ -19,11 +20,11 @@ public class UpdateAwsCredentialsScript(INotificationService notificationService
     private async Task ReplaceCredentialsAsync(string newCredentials)
     {
         var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".aws", "credentials");
-        var credentialsFileData = await File.ReadAllTextAsync(path);
+        var credentialsFileData = await fileService.ReadAllTextAsync(path);
 
         var newCredentialsData = AwsCredentialsRegex.Replace(credentialsFileData, newCredentials + Environment.NewLine);
 
-        await File.WriteAllTextAsync(path, newCredentialsData);
+        await fileService.WriteAllTextAsync(path, newCredentialsData);
 
         notificationService.ShowBalloonText("AWS Credentials have been updated");
     }

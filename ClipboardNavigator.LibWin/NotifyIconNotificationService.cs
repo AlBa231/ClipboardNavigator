@@ -2,10 +2,12 @@
 using ClipboardNavigator.Lib.Windows;
 
 namespace ClipboardNavigator.LibWin;
-public class NotifyIconNotificationService(IMainForm mainForm) : INotificationService
+public class NotifyIconNotificationService : INotificationService
 {
+    public IMainForm? MainForm { get; set; }
+
     public void ShowBalloonText(string text, string title = "")
     {
-        mainForm.ShowNotification(title, text, NotificationType.Info);
+        MainForm?.ShowNotification(title, text, NotificationType.Info);
     }
 }

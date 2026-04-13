@@ -1,5 +1,6 @@
 ﻿using ClipboardNavigator.Code;
 using ClipboardNavigator.Lib.Commands;
+using ClipboardNavigator.Lib.Notification;
 using ClipboardNavigator.Lib.Plugins;
 using ClipboardNavigator.Lib.Windows;
 
@@ -11,7 +12,9 @@ public class AppInitializerTests
     private readonly Mock<IClipboardDataProvider> _dataProviderMock = new();
     private readonly Mock<IClipboardFacade> _clipboardFacadeMock = new();
     private readonly Mock<IMainForm> _mainFormMock = new();
+    private readonly Mock<IHotkeyManager> _hotkeyManagerMock = new();
     private readonly Mock<IClipboardListBox> _mainListBoxMock = new();
+    private readonly Mock<INotificationService> _notificationServiceMock = new();
 
     public AppInitializerTests()
     {
@@ -26,11 +29,11 @@ public class AppInitializerTests
         // Arrange
         var pluginManagerMock = new Mock<IPluginManager>();
         var commandFactoryMock = new Mock<IClipboardCommandFactory>();
-        var appInitializer = new AppInitializer(_dataProviderMock.Object, _clipboardFacadeMock.Object, pluginManagerMock.Object, commandFactoryMock.Object, _mainFormMock.Object, _windowService);
+        var appInitializer = new AppInitializer(_dataProviderMock.Object, _clipboardFacadeMock.Object, pluginManagerMock.Object, commandFactoryMock.Object, _hotkeyManagerMock.Object, _notificationServiceMock.Object, _windowService);
         pluginManagerMock.Setup(x => x.PluginFactory.Plugins).Returns([]);
 
         // Act
-        appInitializer.Initialize();
+        appInitializer.Initialize(_mainFormMock.Object);
 
         // Asser
         pluginManagerMock.VerifyAll();
@@ -44,7 +47,7 @@ public class AppInitializerTests
         // Arrange
         var pluginManagerMock = new Mock<IPluginManager>();
         var commandFactoryMock = new Mock<IClipboardCommandFactory>();
-        var appInitializer = new AppInitializer(_dataProviderMock.Object, _clipboardFacadeMock.Object, pluginManagerMock.Object, commandFactoryMock.Object, _mainFormMock.Object, _windowService);
+        var appInitializer = new AppInitializer(_dataProviderMock.Object, _clipboardFacadeMock.Object, pluginManagerMock.Object, commandFactoryMock.Object, _hotkeyManagerMock.Object, _notificationServiceMock.Object, _windowService);
 
         // Act
         appInitializer.Dispose();
@@ -60,12 +63,12 @@ public class AppInitializerTests
         // Arrange
         var pluginManagerMock = new Mock<IPluginManager>();
         var commandFactoryMock = new Mock<IClipboardCommandFactory>();
-        var appInitializer = new AppInitializer(_dataProviderMock.Object, _clipboardFacadeMock.Object, pluginManagerMock.Object, commandFactoryMock.Object, _mainFormMock.Object, _windowService);
+        var appInitializer = new AppInitializer(_dataProviderMock.Object, _clipboardFacadeMock.Object, pluginManagerMock.Object, commandFactoryMock.Object, _hotkeyManagerMock.Object, _notificationServiceMock.Object, _windowService);
 
         pluginManagerMock.Setup(x => x.PluginFactory.Plugins).Returns([]);
 
         // Act
-        appInitializer.Initialize();
+        appInitializer.Initialize(_mainFormMock.Object);
 
         // Asser
         commandFactoryMock.Verify(x => x.RegisterCommand(It.IsAny<IHotKey>(), It.IsAny<IClipboardCommand>()), Times.AtLeastOnce);

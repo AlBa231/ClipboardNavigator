@@ -7,6 +7,8 @@ namespace ClipboardNavigator.Code.Windows;
 
 public class WindowService(IServiceProvider serviceProvider) : IWindowService
 {
+    private TaskBarPopupForm PopupForm => field ??= serviceProvider.GetRequiredService<TaskBarPopupForm>();
+
     public bool ShowSettingsDialog<T>(T settingsObject)
     {
         var dialog = serviceProvider.GetRequiredService<PluginSettingsForm>();
@@ -18,5 +20,10 @@ public class WindowService(IServiceProvider serviceProvider) : IWindowService
     {
         var dialog = serviceProvider.GetRequiredService<PluginListForm>();
         return dialog.ShowDialog() == DialogResult.OK;
+    }
+
+    public void TogglePopupForm()
+    {
+        PopupForm.ToggleVisibility();
     }
 }
