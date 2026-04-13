@@ -2,10 +2,9 @@
 
 namespace ClipboardNavigator.Lib.Scripts;
 
-public abstract class ClipboardScript
+public abstract class ClipboardScript(INotificationService notificationService) : IClipboardScript
 {
     public string Name => GetType().Name;
-    public INotificationService? NotificationService { get; set; }
 
     public virtual async Task Execute(ClipboardDataEventArgs clipboardData)
     {

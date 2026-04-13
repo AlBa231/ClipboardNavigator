@@ -1,11 +1,12 @@
 ﻿using System.Runtime.InteropServices;
 using ClipboardNavigator.Lib;
 using ClipboardNavigator.Lib.Commands;
+using ClipboardNavigator.Lib.Windows;
 using Microsoft.Extensions.Logging;
 
 namespace ClipboardNavigator.LibWin.Commands;
 
-public class HotkeyManager(ILogger<HotkeyManager> logger):IHotkeyManager
+public class HotkeyManager(ILogger<HotkeyManager> logger, IMainForm mainForm):IHotkeyManager
 {
     private const int InitHotkeyId = 100;
     [DllImport("user32.dll")]
@@ -16,7 +17,6 @@ public class HotkeyManager(ILogger<HotkeyManager> logger):IHotkeyManager
 
     private readonly List<IHotKey> _registeredHotkeys = [];
 
-    public IntPtr? MainFormHandler { get; set; }
 
     public IHotKey? FindHotkeyById(int hotkeyId)
     {
@@ -29,12 +29,10 @@ public class HotkeyManager(ILogger<HotkeyManager> logger):IHotkeyManager
 
     public bool RegisterHotKey(IHotKey hotkey)
     {
-        if (MainFormHandler == null)
-            throw new InvalidOperationException($"Before calling this method, you need to set {nameof(MainFormHandler)} first.");
         try
         {
             _registeredHotkeys.Add(hotkey);
-            return RegisterHotKey(MainFormHandler.Value, _registeredHotkeys.Count + InitHotkeyId, (uint)hotkey.Modifiers, (uint)hotkey.Key);
+            return RegisterHotKey(mainForm.Handle, _registeredHotkeys.Count + InitHotkeyId, (uint)hotkey.Modifiers, (uint)hotkey.Key);
         }
         catch (Exception e)
         {

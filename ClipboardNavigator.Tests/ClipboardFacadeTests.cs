@@ -1,59 +1,29 @@
-﻿using ClipboardNavigator.Lib.Notification;
+﻿using ClipboardNavigator.Lib.Commands;
+using ClipboardNavigator.Lib.Notification;
+using ClipboardNavigator.Lib.Scripts;
 
 namespace ClipboardNavigator.Tests;
 
 public class ClipboardFacadeTests
 {
-    private readonly Mock<INotificationService> mockNotificationService = new();
+    private readonly Mock<INotificationService> _notificationServiceMock = new();
+    private readonly Mock<IScriptFactory> _scriptFactoryMock = new();
+    private readonly Mock<IHotkeyManager> _hotkeyManagerMock = new();
+    private readonly Mock<IClipboardCommandFactory> _commandFactoryMock = new();
 
     [Fact]
     public void TestClipboardFacadeGetItems()
     {
-        var testData = new ClipboardData("test data");
-        // ReSharper disable once PossibleUnintendedReferenceComparison
-        var dataProvider = Mock.Of<IClipboardDataProvider>(p => p.GetCurrentValue() == testData);
-        IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider, mockNotificationService.Object);
+        // Arrange
+        IClipboardFacade clipboardFacade = new ClipboardFacade(_scriptFactoryMock.Object, _hotkeyManagerMock.Object,
+            _commandFactoryMock.Object, _notificationServiceMock.Object);
 
+        // Act
+        clipboardFacade.ProcessNewClipboardData(new ClipboardData("test data"));
         var items = clipboardFacade.History;
 
+        // Assert
         Assert.Single(items);
         Assert.Equal("test data", items[0].Text);
-    }
-
-    [Fact]
-    public void TestClipboardNewItem()
-    {
-        var testData = new ClipboardData("test data");
-        var testData2 = new ClipboardData("test data 2");
-        // ReSharper disable once PossibleUnintendedReferenceComparison
-        var dataProvider = Mock.Of<IClipboardDataProvider>(p => p.GetCurrentValue() == testData);
-        IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider, mockNotificationService.Object);
-
-        Mock.Get(dataProvider).Raise(m=>m.Changed += null, testData2);
-
-        var items = clipboardFacade.History;
-
-        Assert.Equal(2, items.Count);
-        Assert.Equal("test data 2", items[0].Text);
-        Assert.Equal("test data", items[1].Text);
-    }
-
-    [Fact]
-    public void TestNoDuplicateItemOnSetCurrentValue()
-    {
-        var testData = new ClipboardData("test data");
-        var dataProvider = new Mock<IClipboardDataProvider>();
-        dataProvider.Setup(p => p.GetCurrentValue()).Returns(testData);
-        dataProvider.Setup(p=>p.SetCurrentValue(It.IsAny<ClipboardData>()))
-            .Raises(p => p.Changed += null, 
-                new ClipboardData("test"));
-        IClipboardFacade clipboardFacade = new ClipboardFacade(dataProvider.Object, mockNotificationService.Object);
-
-        dataProvider.Raise(m=>m.Changed += null, new ClipboardData("test data 2"));
-        clipboardFacade.CurrentValue = new ClipboardData("test data 2");
-
-        var items = clipboardFacade.History;
-
-        Assert.Equal(2, items.Count);
     }
 }

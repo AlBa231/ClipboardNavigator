@@ -1,7 +1,8 @@
 ﻿using System.Text.RegularExpressions;
+using ClipboardNavigator.Lib.Notification;
 
 namespace ClipboardNavigator.Lib.Scripts;
-public class UpdateAwsCredentialsScript:ClipboardScript
+public class UpdateAwsCredentialsScript(INotificationService notificationService):ClipboardScript(notificationService)
 {
     private static readonly Regex AwsCredentialsRegex = new(@"(?<AWS_Credentials>aws_access_key_id\s*=\s*(\S+)\s*[\r\n]+aws_secret_access_key\s*=\s*(\S+)\s*[\r\n]+aws_session_token\s*=\s*(\S+)\s*)", RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
@@ -24,6 +25,6 @@ public class UpdateAwsCredentialsScript:ClipboardScript
 
         await File.WriteAllTextAsync(path, newCredentialsData);
 
-        NotificationService?.ShowBalloonText("AWS Credentials have been updated");
+        notificationService.ShowBalloonText("AWS Credentials have been updated");
     }
 }

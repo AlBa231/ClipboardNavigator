@@ -28,7 +28,8 @@ internal static class Program
         services
             .AddControls()
             .AddAppServices()
-            .AddPlugins();
+            .AddPlugins()
+            .AddScripts();
     }
 
     private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)

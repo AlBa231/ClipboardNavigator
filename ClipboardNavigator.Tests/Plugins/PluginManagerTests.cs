@@ -13,7 +13,7 @@ public class PluginManagerTests
         var pluginManager = new PluginManager(pluginFactory);
 
         // Act
-        pluginManager.RunPlugins();
+        pluginManager.StartPlugins();
         await Task.Delay(10);
         await pluginManager.StopAllServices();
 
@@ -31,7 +31,7 @@ public class PluginManagerTests
 
         // Act
         testPlugin.State = RunState.Paused;
-        pluginManager.RunPlugins();
+        pluginManager.StartPlugins();
         await Task.Delay(10);
         await pluginManager.StopAllServices();
 

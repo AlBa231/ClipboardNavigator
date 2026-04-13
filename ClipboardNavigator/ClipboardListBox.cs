@@ -1,24 +1,26 @@
 ﻿using System.ComponentModel;
 using ClipboardNavigator.Lib;
+using ClipboardNavigator.Lib.Windows;
 
 namespace ClipboardNavigator;
 
-public partial class ClipboardListBox : UserControl
+public partial class ClipboardListBox : UserControl, IClipboardListBox
 {
-    private IClipboardFacade clipboardFacade;
-
     public event ClipboardSelectedItem SelectionChanged;
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public IClipboardFacade ClipboardFacade
     {
-        get => clipboardFacade;
+        get;
         set
         {
-            clipboardFacade = value;
+            field = value;
             Init();
         }
     }
+
+    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    public IClipboardDataProvider DataProvider { get; set; }
 
     [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
     public ClipboardData? SelectedItem
@@ -39,9 +41,9 @@ public partial class ClipboardListBox : UserControl
 
     private void lbClipboardHistory_MouseClick(object sender, MouseEventArgs e)
     {
-        if (lbClipboardHistory.SelectedItem is ClipboardData item) 
-            ClipboardFacade.CurrentValue = item;
-        OnSelectionChanged(ClipboardFacade.CurrentValue);
+        if (lbClipboardHistory.SelectedItem is not ClipboardData item) return;
+        DataProvider.SetCurrentValue(item);
+        OnSelectionChanged(item);
     }
 
     protected virtual void OnSelectionChanged(ClipboardData value)
@@ -49,5 +51,3 @@ public partial class ClipboardListBox : UserControl
         SelectionChanged?.Invoke(value);
     }
 }
-
-public delegate void ClipboardSelectedItem(ClipboardData value);

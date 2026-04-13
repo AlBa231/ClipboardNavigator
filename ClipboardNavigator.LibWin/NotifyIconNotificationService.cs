@@ -1,10 +1,11 @@
 ﻿using ClipboardNavigator.Lib.Notification;
+using ClipboardNavigator.Lib.Windows;
 
 namespace ClipboardNavigator.LibWin;
-public class NotifyIconNotificationService(NotifyIcon notifyIcon) : INotificationService
+public class NotifyIconNotificationService(IMainForm mainForm) : INotificationService
 {
     public void ShowBalloonText(string text, string title = "")
     {
-        notifyIcon.ShowBalloonTip(2000, title, text, ToolTipIcon.None);
+        mainForm.ShowNotification(title, text, NotificationType.Info);
     }
 }

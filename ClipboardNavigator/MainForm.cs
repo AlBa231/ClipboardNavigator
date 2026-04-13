@@ -1,52 +1,51 @@
 using ClipboardNavigator.Code;
 using ClipboardNavigator.Lib;
-using ClipboardNavigator.Lib.Commands;
 using ClipboardNavigator.Lib.Plugins;
 using ClipboardNavigator.Lib.Plugins.Interfaces;
 using ClipboardNavigator.Lib.Windows;
-using ClipboardNavigator.LibWin;
 using ClipboardNavigator.LibWin.Win32;
 
 namespace ClipboardNavigator;
 
 public partial class MainForm : Form, IMainForm
 {
-    private readonly IPluginFactory _pluginFactory;
-    private readonly IHotkeyManager _hotkeyManager;
-    private readonly IClipboardCommandFactory _commandFactory;
     private readonly IClipboardFacade _clipboardFacade;
-    private TaskBarPopupForm? _popupForm;
     private bool _isFirstShown = true;
 
-    private TaskBarPopupForm PopupForm => _popupForm ??= new TaskBarPopupForm(_clipboardFacade);
+    private TaskBarPopupForm PopupForm => field ??= new TaskBarPopupForm(_clipboardFacade);
 
-    public MainForm(IPluginFactory pluginFactory, IHotkeyManager hotkeyManager, IClipboardCommandFactory commandFactory, AppInitializer appInitializer)
+    public IClipboardListBox MainListBox => clipboardListBox;
+
+    public MainForm(IClipboardFacade clipboardFacade, AppInitializer appInitializer)
     {
-        _pluginFactory = pluginFactory;
-        _hotkeyManager = hotkeyManager;
-        _commandFactory = commandFactory;
+        _clipboardFacade = clipboardFacade;
         InitializeComponent();
-        hotkeyManager.MainFormHandler = Handle;
         appInitializer.Initialize();
-        _clipboardFacade = InitFacade();
-        InitUi();
     }
 
-    private void InitUi()
+    public Task ShowNotification(string title, string message, NotificationType type)
     {
-        clipboardListBox.ClipboardFacade = _clipboardFacade;
-        clipboardListBox.SelectionChanged += _ => UpdateTextField();
-        UpdateTextField();
-        InitPluginsMenu();
+        notifyIcon.ShowBalloonTip(2000, title, message, ToolTipIcon.Info);
+        return Task.CompletedTask;
+    }
+
+    public void InitPluginsMenu(IEnumerable<IPlugin> plugins)
+    {
+        var menuItems = plugins.Select(p =>
+            new ToolStripMenuItem(p.Name, null, pluginMenuItem_Click) { Tag = p, Checked = true }).Cast<ToolStripItem>().ToArray();
+        menuPlugins.DropDownItems.AddRange(menuItems);
+    }
+
+    public void UpdateSelectedItem(ClipboardData clipboardData)
+    {
+        textBoxCurrentClipboard.Text = clipboardData.Text;
+        clipboardListBox.SelectedItem = clipboardData;
     }
 
     protected override void WndProc(ref Message m)
     {
         if (m.Msg == Win32Constants.WM_HOTKEY)
-        {
-            IHotKey? command = _hotkeyManager.FindHotkeyById(m.WParam.ToInt32());
-            _commandFactory.ExecuteCommand(command);
-        }
+            _clipboardFacade.FindAndExecuteCommand(m.WParam.ToInt32());
         base.WndProc(ref m);
     }
 
@@ -60,27 +59,12 @@ public partial class MainForm : Form, IMainForm
         base.SetVisibleCore(value);
     }
 
-    private void InitPluginsMenu()
-    {
-        var menuItems = _pluginFactory.Plugins.Select(p =>
-            new ToolStripMenuItem(p.Name, null, pluginMenuItem_Click){Tag = p, Checked = true}).Cast<ToolStripItem>().ToArray();
-        menuPlugins.DropDownItems.AddRange(menuItems);
-    }
-
     private void pluginMenuItem_Click(object? sender, EventArgs e)
     {
         ToolStripMenuItem menuItem = (ToolStripMenuItem?)sender ?? throw new ArgumentNullException(nameof(sender));
         IPlugin plugin = (IPlugin?)menuItem.Tag ?? throw new ArgumentException("Sender doesn't contain reference to a Plugin", nameof(sender));
         menuItem.Checked = !menuItem.Checked;
         plugin.State = menuItem.Checked ? RunState.Running : RunState.Paused;
-    }
-
-    private ClipboardFacade InitFacade()
-    {
-        var clipboardDataProvider = new WindowsClipboardDataProvider();
-        var facade = new ClipboardFacade(clipboardDataProvider, new NotifyIconNotificationService(notifyIcon));
-        facade.History.ListChanged += (_, _) => UpdateTextField();
-        return facade;
     }
 
     private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -109,12 +93,6 @@ public partial class MainForm : Form, IMainForm
         {
             hideShowToolStripMenuItem_Click(sender, e);
         }
-    }
-
-    private void UpdateTextField()
-    {
-        textBoxCurrentClipboard.Text = _clipboardFacade.CurrentValue.Text;
-        clipboardListBox.SelectedItem = _clipboardFacade.CurrentValue;
     }
 
     private void hideShowToolStripMenuItem_Click(object sender, EventArgs e)

@@ -9,7 +9,7 @@ public sealed class PluginManager(IPluginFactory pluginFactory) : IPluginManager
 
     public IPluginFactory PluginFactory { get; } = pluginFactory;
 
-    public void RunPlugins()
+    public void StartPlugins()
     {
         RunBackgroundServices();
     }

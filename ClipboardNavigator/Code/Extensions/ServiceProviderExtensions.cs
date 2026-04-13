@@ -1,12 +1,16 @@
 ﻿using System.Reflection;
 using ClipboardNavigator.Code.Windows;
 using ClipboardNavigator.Code.Windows.Forms.Plugins;
+using ClipboardNavigator.Lib;
 using ClipboardNavigator.Lib.Commands;
 using ClipboardNavigator.Lib.Extensions;
+using ClipboardNavigator.Lib.Notification;
 using ClipboardNavigator.Lib.Plugins;
 using ClipboardNavigator.Lib.Plugins.BackgroundServices;
 using ClipboardNavigator.Lib.Plugins.Interfaces;
+using ClipboardNavigator.Lib.Scripts;
 using ClipboardNavigator.Lib.Windows;
+using ClipboardNavigator.LibWin;
 using ClipboardNavigator.LibWin.Commands;
 using ClipboardNavigator.LibWin.Plugins.BackgroundServices;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,11 +25,17 @@ internal static class ServiceProviderExtensions
         {
             services.AddSingleton<IIdleTimeService, IdleTimeServiceWindows>();
             services.AddSingleton<IPluginFactory, PluginFactory>();
+            services.AddSingleton<IScriptFactory, ScriptFactory>();
             services.AddSingleton<IPluginManager, PluginManager>();
             services.AddSingleton<IHotkeyManager, HotkeyManager>();
             services.AddSingleton<IClipboardCommandFactory, ClipboardCommandFactory>();
             services.AddSingleton<IWindowService, WindowService>();
             services.AddSingleton<AppInitializer>();
+
+            services.AddTransient<INotificationService, NotifyIconNotificationService>();
+            services.AddTransient<IClipboardDataProvider, WindowsClipboardDataProvider>();
+            services.AddTransient<IClipboardFacade, ClipboardFacade>();
+
             return services;
         }
 
@@ -44,6 +54,15 @@ internal static class ServiceProviderExtensions
             foreach (Type type in typeof(IPlugin).Assembly.GetTypesOf<IPlugin>())
             {
                 services.AddTransient(type);
+            }
+            return services;
+        }
+
+        public IServiceCollection AddScripts()
+        {
+            foreach (Type type in typeof(IClipboardScript).Assembly.GetTypesOf<IClipboardScript>())
+            {
+                services.AddSingleton(type);
             }
             return services;
         }

@@ -5,6 +5,6 @@ namespace ClipboardNavigator.Lib.Plugins;
 public interface IPluginManager
 {
     IPluginFactory PluginFactory { get; }
-    void RunPlugins();
+    void StartPlugins();
     Task StopAllServices();
 }
