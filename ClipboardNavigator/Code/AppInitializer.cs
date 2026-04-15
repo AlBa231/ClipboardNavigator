@@ -32,7 +32,7 @@ public sealed class AppInitializer(
     private void RegisterAllCommands()
     {
         commandFactory.RegisterCommand(
-            new HotKey { Modifiers = HotkeyModifiers.Shift | HotkeyModifiers.Control, Key = (int)Keys.P },
+            new HotKey { Modifiers = HotkeyModifiers.Shift | HotkeyModifiers.Control | HotkeyModifiers.Alt, Key = (int)Keys.P },
             new ShowPluginsCommand(windowService));
     }
 
